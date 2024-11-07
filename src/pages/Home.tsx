@@ -1,7 +1,7 @@
 import HomeSvg from '../assets/Home_Section_One.svg'
 import {Button} from '@/components/ui/button'
 import { ServiceCard } from '../components/serviceCard/index'
-import { CircleDollarSign } from 'lucide-react'
+import { CircleDollarSign, Car, Factory } from 'lucide-react'
 
 export default function Home() {
   return (
@@ -23,23 +23,23 @@ export default function Home() {
         <ServiceCard.Root>
           <ServiceCard.Icon icon={<CircleDollarSign size={65}/>}/>
           <ServiceCard.Title title="Simulação de empréstimo" />
-          <ServiceCard.Description description="Lorem ipsulum in dolor aks dawdkaowk sadk oakdo oasdko kok awodk oakd "/>
+          <ServiceCard.Description description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."/>
         </ServiceCard.Root>
 
         <ServiceCard.Root>
-          <ServiceCard.Icon icon={<CircleDollarSign size={65}/>}/>
-          <ServiceCard.Title title="Simulação de empréstimo" />
-          <ServiceCard.Description description="Lorem ipsulum in dolor aks dawdkaowk sadk oakdo oasdko kok awodk oakd "/>
+          <ServiceCard.Icon icon={<Factory size={65}/>}/>
+          <ServiceCard.Title title="Empréstimo para empresas" />
+          <ServiceCard.Description description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
         </ServiceCard.Root>
 
         <ServiceCard.Root>
-          <ServiceCard.Icon icon={<CircleDollarSign size={65}/>}/>
-          <ServiceCard.Title title="Simulação de empréstimo" />
-          <ServiceCard.Description description="Lorem ipsulum in dolor aks dawdkaowk sadk oakdo oasdko kok awodk oakd "/>
+          <ServiceCard.Icon icon={<Car size={65}/>}/>
+          <ServiceCard.Title title="Empréstimo de Automoveis" />
+          <ServiceCard.Description description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."/>
         </ServiceCard.Root>
       </ul>
       <br/>
-      <Button className="w-1/3">Saber mais</Button>
+      <Button variant="outline" className="w-1/3">Saber mais</Button>
     </section>
         {/* Sessão 3 */}
       <section>

@@ -4,6 +4,6 @@ interface IDescription {
 
 export default function ServiceDescription({ description }: IDescription) {
   return (
-    <p>{description}</p>
+    <p className="mt-2 text-sm">{description}</p>
   )
 }
