@@ -4,7 +4,7 @@ import Home from './pages/Home'
 function App() {
   return (
     <BrowserRouter>
-      <main>
+      <main className="w-full h-full">
         <Routes>
           <Route path="/" element={<Home/>} />
         </Routes>
