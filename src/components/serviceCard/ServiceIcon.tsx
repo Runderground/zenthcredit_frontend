@@ -4,6 +4,6 @@ interface IIcon {
 
 export default function ServiceIcon({ icon }: IIcon) {
   return (
-    <i className="text-slate-600">{icon}</i>
+    <i className="text-slate-600 mb-4">{icon}</i>
   )
 }
