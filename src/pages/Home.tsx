@@ -17,7 +17,7 @@ export default function Home() {
       </section>
 
     {/* Sessão 2 */}
-    <section className="flex flex-col p-2 items-center justify-center text-center w-full bg-gradient-to-r from-white to-blue-200">
+    <section id="services" className="flex flex-col p-2 mb-4 items-center justify-center text-center w-full bg-gradient-to-r from-white to-blue-200">
     <h2 className="text-3xl mb-4 text-zinc-600">Nossos serviços</h2>
       <ul className="flex flex-col lg:flex-row gap-1">
         <ServiceCard.Root>
@@ -38,7 +38,13 @@ export default function Home() {
           <ServiceCard.Description description="Lorem ipsulum in dolor aks dawdkaowk sadk oakdo oasdko kok awodk oakd "/>
         </ServiceCard.Root>
       </ul>
+      <br/>
+      <Button className="w-1/3">Saber mais</Button>
     </section>
+        {/* Sessão 3 */}
+      <section>
+        <h2 className="text-3xl mb-4 text-slate-600">Como trabalhamos?</h2>
+      </section>
     </>
   )
 }
