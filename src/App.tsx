@@ -4,6 +4,8 @@ import Home from './pages/Home'
 import SideBar from './components/SideBar'
 import Footer from './components/Footer'
 import WhatsAppButton from './components/WhatsAppButton'
+import Contact from './pages/Contact'
+import About from './pages/About'
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         </header>
         <Routes>
           <Route path="/" element={<Home/>} />
+          <Route path="/contato" element={<Contact/>} />
+          <Route path="/sobre-nos" element={<About/>} />
         </Routes>
         <WhatsAppButton/>
         <Footer/>
