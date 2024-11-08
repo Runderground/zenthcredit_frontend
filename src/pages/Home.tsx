@@ -28,13 +28,13 @@ export default function Home() {
 
         <ServiceCard.Root>
           <ServiceCard.Icon icon={<Factory size={65}/>}/>
-          <ServiceCard.Title title="Empréstimo para empresas" />
+          <ServiceCard.Title title="Financiamento para empresas" />
           <ServiceCard.Description description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
         </ServiceCard.Root>
 
         <ServiceCard.Root>
           <ServiceCard.Icon icon={<Car size={65}/>}/>
-          <ServiceCard.Title title="Empréstimo de Automoveis" />
+          <ServiceCard.Title title="Financiamento de Automoveis" />
           <ServiceCard.Description description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."/>
         </ServiceCard.Root>
       </ul>
@@ -42,8 +42,9 @@ export default function Home() {
       <Button variant="outline" className="w-1/3">Saber mais</Button>
     </section>
         {/* Sessão 3 */}
-      <section>
+      <section className="text-center">
         <h2 className="text-3xl mb-4 text-slate-600">Como trabalhamos?</h2>
+        <p className="text-lg mb-4 text-slate-600">Este é o processo de como você consegue realizar seu empréstimo</p>
       </section>
     </>
   )
