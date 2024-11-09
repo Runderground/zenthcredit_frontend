@@ -11,6 +11,7 @@ import {
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
 import { Home, Headset, Users, BriefcaseBusiness } from "lucide-react";
+import { Link } from 'react-router-dom'
 
 export default function SideBar() {
   const navegationItems = [
@@ -23,11 +24,6 @@ export default function SideBar() {
       title: "Sobre nós",
       url: "/sobre-nos",
       icon: Users,
-    },
-    {
-      title: "Serviços",
-      url: "/#services",
-      icon: BriefcaseBusiness,
     },
     {
       title: "Contato",
@@ -45,13 +41,21 @@ export default function SideBar() {
                 {navegationItems.map((item) => (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild>
-                      <a href={item.url}>
+                      <Link to={item.url}>
                         <item.icon />
                         <span>{item.title}</span>
-                      </a>
+                      </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                <a href="#services">
+                  <BriefcaseBusiness />
+                  <span>Serviços</span>
+                </a>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
