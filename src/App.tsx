@@ -19,9 +19,14 @@ function App() {
           <div></div>
         </header>
         <Routes>
+          {/* Rotas Públicas / Sem necessidade de Autenticação */}
           <Route path="/" element={<Home/>} />
           <Route path="/contato" element={<Contact/>} />
           <Route path="/sobre-nos" element={<About/>} />
+
+          {/* Rotas Privadas / Com necessidade de autenticação */}
+
+          <Route path="/admin/painel" element={<Da}
         </Routes>
         <WhatsAppButton/>
         <Footer/>
