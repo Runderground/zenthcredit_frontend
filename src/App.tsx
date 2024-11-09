@@ -8,7 +8,7 @@ import Contact from './pages/Contact'
 import About from './pages/About'
 import Dashboard from './pages/adminPages/Dashboard'
 import ContactView from './pages/adminPages/ContactView'
-import RegisterView from './pages/adminPages/RegistersView'
+import RegistersView from './pages/adminPages/RegistersView'
 
 function App() {
   return (
@@ -30,8 +30,8 @@ function App() {
           {/* Rotas Privadas / Com necessidade de autenticação */}
 
           <Route path="/admin/painel" element={<Dashboard/>} />
-          <Route path="/admin/contacts" element={<ContactView/>} />
-          <Route path="/admin/painel" element={<RegisterView/>} />
+          <Route path="/admin/contatos" element={<ContactView/>} />
+          <Route path="/admin/cadastros" element={<RegistersView/>} />
         </Routes>
         <WhatsAppButton/>
         <Footer/>

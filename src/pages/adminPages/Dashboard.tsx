@@ -101,7 +101,7 @@ export default function Dashboard() {
                       <span className="text-slate-500 text-sm">(11) 99418-7606</span>
                     </div>
                   </div>
-                  <div className="flex gap-2 items-center">
+                  <div className="flex flex-col lg:flex-row gap-2 gap-2 items-center">
                     <Button>Ver</Button>
                     <Button className="bg-green-400 hover:bg-green-500"><BsWhatsapp/></Button>
                   </div>
