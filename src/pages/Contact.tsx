@@ -17,10 +17,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from '@/components/ui/textarea'
 
 const formSchema = z.object({
-  nome: z.string().nonempty({message: "Este campo é obrigatório"}).min(3, {message: "O seu nome deve ter no mínimo 3 caracteres"}).max(50, {message: "Você excedeu o limite de caracteres, caso precise, abrevie seu nome. Ex: João S. Silva"}),
+  nome: z.string().nonempty({message: "Este campo é obrigatório"}).min(3, {message: "O seu nome deve ter no mínimo 3 caracteres"}).max(50, {message: "Você excedeu o limite de caracteres, caso precise, abrevie seu nome. Ex: João S. Silva"}).regex(/^[a-zA-Z0-9\s]*$/, {message: "Não é permitido caracteres especiais"}),
   email: z.string().email({message: "Insira um email válido!"}).nonempty({message: "Este campo é obrigatório"}).min(3, {message: "O seu nome deve ter no mínimo 3 caracteres"}).max(100, {message: "Você excedeu o limite de *100* caracteres"}),
   telefone: z.string().nonempty({message: "Este campo é obrigatório"}).regex(/^(?:\+55\s?)?(\(?\d{2}\)?\s?)?\d{4,5}[\s\-]?\d{4}$/, {message: "Insira um número telefone válido!"}),
-  comentario: z.string().min(10, {message: "O seu comentário deve ter no mínimo 10 caracteres"}).max(250, {message: "Você excedeu o limite de *250* caracteres"})
+  comentario: z.string().max(250, {message: "Você excedeu o limite de *250* caracteres"}).regex(/^[a-zA-Z0-9\s.,;!?$%@áéíóúâêîôûãõçÁÉÍÓÚÂÊÎÔÛÃÕÇàèìòùÀÈÌÒÙ]*$/, {message: "Não é permitido caracteres especiais"}).optional()
 })
 
 export default function Contact() {
@@ -45,7 +45,7 @@ export default function Contact() {
         <h2 className="font-semibold text-3xl text-slate-700">Fale Conosco</h2>
         <span className="text-slate-600">Está com alguma dúvida ou precisando de ajuda?</span>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4 mt-6">
             <FormField 
               control={form.control}
               name="nome"
@@ -77,7 +77,7 @@ export default function Contact() {
               name="telefone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Telefone :</FormLabel>
+                  <FormLabel>Telefone / WhatsApp :</FormLabel>
                   <FormControl>
                     <InputMask mask="(99) 99999-9999" {...field}>
                       {() => (
@@ -102,9 +102,10 @@ export default function Contact() {
                 </FormItem>
               )}
               />
-            <Button type="submit">Enviar</Button>
+            <Button className="mb-4" type="submit">Enviar</Button>
           </form>
         </Form>
+        <span className="text-slate-500">Após o envio, algum de nossos atendentes irá tentar entrar em contato.</span>
       </div>
     </section>
   )
