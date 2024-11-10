@@ -9,6 +9,7 @@ import About from './pages/About'
 import Dashboard from './pages/adminPages/Dashboard'
 import ContactView from './pages/adminPages/ContactView'
 import RegistersView from './pages/adminPages/RegistersView'
+import RegisterView from './pages/adminPages/RegisterView'
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/admin/painel" element={<Dashboard/>} />
           <Route path="/admin/contatos" element={<ContactView/>} />
           <Route path="/admin/cadastros" element={<RegistersView/>} />
+          <Route path="/admin/cadastros/:id" element={<RegisterView/>} />
         </Routes>
         <WhatsAppButton/>
         <Footer/>

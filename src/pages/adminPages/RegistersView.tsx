@@ -24,8 +24,13 @@ import {
   TableRow,
 } from '@/components/ui/table'
 
+import {
+  useNavigate
+} from 'react-router-dom'
+
 
 export default function RegistersView() {
+  const navigate = useNavigate()
   return (
     <div className="m-6 mt-12">
       <h1 className="text-3xl font-semibold mb-4">Olá Rafael 👋,</h1>
@@ -59,21 +64,21 @@ export default function RegistersView() {
                 <TableCell>Rafael Bueno</TableCell>
                 <TableCell>rafaelbuenorb02@gmail.com</TableCell>
                 <TableCell>(11) 99418-7606</TableCell>
-                <TableCell>123-456-789-10</TableCell>
+                <TableCell>123.456.789-10</TableCell>
                 <TableCell>22-04-2007</TableCell>
               </TableRow>
-              <TableRow>
+              <TableRow className="cursor-pointer" onClick={() => navigate("../admin/cadastros/1", {replace: true})}>
                 <TableCell>Joao Pedro</TableCell>
                 <TableCell>joaopedro@gmail.com</TableCell>
                 <TableCell>(12) 12345-67890</TableCell>
-                <TableCell>123-456-789-10</TableCell>
+                <TableCell>123.456.789-10</TableCell>
                 <TableCell>15-02-1999</TableCell>
               </TableRow>
-              <TableRow>
+              <TableRow className="cursor-pointer" onClick={() => navigate("../admin/cadastros/2", {replace: true})}>
                 <TableCell>Maria Clara</TableCell>
                 <TableCell>maria_clara@gmail.com</TableCell>
                 <TableCell>(43) 91238-1244</TableCell>
-                <TableCell>123-456-789-10</TableCell>
+                <TableCell>123.456.789-10</TableCell>
                 <TableCell>12-06-2000</TableCell>
               </TableRow>
             </TableBody>
