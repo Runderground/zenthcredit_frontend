@@ -10,6 +10,8 @@ import Dashboard from './pages/adminPages/Dashboard'
 import ContactView from './pages/adminPages/ContactView'
 import RegistersView from './pages/adminPages/RegistersView'
 import RegisterView from './pages/adminPages/RegisterView'
+import AnalisePerfil from './pages/multiStepForm/AnalisePerfil'
+import MultiStepForm from './pages/MultiStepForm'
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
           <Route path="/" element={<Home/>} />
           <Route path="/contato" element={<Contact/>} />
           <Route path="/sobre-nos" element={<About/>} />
+          <Route path="/registro" element={<MultiStepForm/>} />
 
           {/* Rotas Privadas / Com necessidade de autenticação */}
 
