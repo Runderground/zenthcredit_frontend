@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 const formSchema = z.object({
-  nome: z.string().nonempty({message: "Este campo é obrigatório"}).min(3).max(50, {message: "Você excedeu o limite de caracteres, abrevie o nome caso seja grande."}),
+  nome: z.string().nonempty({message: "Este campo é obrigatório"}).min(3, {message: "Este campo deve conter pelo menos 3 caracteres."}).max(50, {message: "Você excedeu o limite de caracteres, abrevie o nome caso seja grande."}).regex(/^[a-zA-Z0-9\s]*$/, {message: "Não é permitido caracteres especiais"}),
   email: z.string().nonempty({message: "Este campo é obrigatório"}).email({message: "Insira um email válido!"}).min(4).max(100),
   telefone: z.string().nonempty({message: "Este campo é obrigatório"}).min(15,{message: "Insira um número válido!"}),
   cpf: z.string().min(14, {message: "Ínsira um CPF válido!"}),
@@ -40,6 +40,10 @@ export default function MultiStepForm() {
       cpf: "",
       nascimento: "",
       cep: "",
+      renda: "",
+      ocupacao: "",
+      motivo: "",
+      
     },
   });
 
@@ -138,6 +142,7 @@ export default function MultiStepForm() {
           <FormControl>
             <Input placeholder="00/00/0000" {...field} />
           </FormControl>
+          <FormMessage/>
         </FormItem>
       )}
     />
@@ -156,6 +161,133 @@ export default function MultiStepForm() {
     />
   </div>
 }
+
+                {step == 1 && 
+                  <div className="grid grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="renda"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Renda Mensal</FormLabel>
+                          <FormControl>
+                            <Input placeholder="R$ 000.000" {...field} />
+                          </FormControl>
+                          <FormMessage/>
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Email</FormLabel>
+                          <FormControl>
+                            <Input placeholder="exemplo@gmail.com" {...field} />
+                          </FormControl>
+                          <FormMessage/>
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="telefone"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Telefone</FormLabel>
+                          <FormControl>
+                            <Input placeholder="( DD ) 00000-0000" {...field} />
+                          </FormControl>
+                          <FormMessage/>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                }
+
+                {step == 2 && 
+                  <div className="grid grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="nome"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Nome</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Escreva seu Nome" {...field} />
+                          </FormControl>
+                          <FormMessage/>
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Email</FormLabel>
+                          <FormControl>
+                            <Input placeholder="exemplo@gmail.com" {...field} />
+                          </FormControl>
+                          <FormMessage/>
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="telefone"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Telefone</FormLabel>
+                          <FormControl>
+                            <Input placeholder="( DD ) 00000-0000" {...field} />
+                          </FormControl>
+                          <FormMessage/>
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="cpf"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>CPF</FormLabel>
+                          <FormControl>
+                            <Input placeholder="000.000.000-00" {...field} />
+                          </FormControl>
+                          <FormMessage/>
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="nascimento"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Nascimento</FormLabel>
+                          <FormControl>
+                            <Input placeholder="00/00/0000" {...field} />
+                          </FormControl>
+                          <FormMessage/>
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="cep"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>CEP</FormLabel>
+                          <FormControl>
+                            <Input placeholder="00000-000" {...field} />
+                          </FormControl>
+                          <FormMessage/>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                }
                 <Button
                   className={`bg-green-500 hover:bg-green-600 w-full mt-4 ${step === 2 ? "block" : "hidden"}`}
                   type="submit"
