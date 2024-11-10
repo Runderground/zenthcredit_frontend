@@ -66,8 +66,6 @@ export default function Home() {
           <ServiceCard.Description description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."/>
         </ServiceCard.Root>
       </ul>
-      <br/>
-      <Button variant="outline" className="w-1/3">Saber mais</Button>
     </section>
         {/* Sessão 3 */}
       <section className="text-center m-4">
