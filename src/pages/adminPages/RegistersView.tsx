@@ -35,7 +35,7 @@ export default function RegistersView() {
         <div className="flex flex-col lg:flex-row gap-4 justify-between items-center">
           <CardTitle>Todos os usuários cadastrados</CardTitle>
           <div className="flex gap-2">
-            <Input className="w-56" placeholder="Pesquise pelo nome"/>
+            <Input className="w-56" placeholder="Pesquise pelo email"/>
             <Button><Search/></Button>
           </div>
         </div>

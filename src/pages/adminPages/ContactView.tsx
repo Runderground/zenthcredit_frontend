@@ -2,8 +2,7 @@ import {
   Card,
   CardHeader,
   CardTitle,
-  CardDescription,
-  CardContent
+  CardContent,
 } from '@/components/ui/card'
 
 import { Input } from '@/components/ui/input'
@@ -25,6 +24,15 @@ import {
   TableRow,
 } from '@/components/ui/table'
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+
 import { Badge } from '@/components/ui/badge'
 
 
@@ -38,7 +46,7 @@ export default function ContactView() {
         <div className="flex flex-col lg:flex-row gap-4 justify-between items-center">
           <CardTitle>Todos os contatos pendentes</CardTitle>
           <div className="flex gap-2">
-            <Input className="w-56" placeholder="Pesquise pelo nome"/>
+            <Input className="w-56" placeholder="Pesquise pelo email"/>
             <Button><Search/></Button>
           </div>
         </div>
@@ -46,7 +54,7 @@ export default function ContactView() {
         <CardContent>
           <Table>
             <TableCaption>
-              Lista de todos os usuários cadastrados na Zenith.
+              Lista de todos contatos cadastrados
             </TableCaption>
             <TableHeader>
               <TableRow>
@@ -60,7 +68,28 @@ export default function ContactView() {
             </TableHeader>
             <TableBody>
               <TableRow>
-                <TableCell><Button variant="outline"><Bolt/></Button></TableCell>
+                <TableCell><DropdownMenu>
+                  <DropdownMenuTrigger>
+                    <Bolt/>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuLabel>
+                      Opções
+                    </DropdownMenuLabel>
+                    <DropdownMenuItem>
+                      Alterar situação
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      Chamar no WhatsApp
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      Editar contato
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      Excluir contato
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu></TableCell>
                 <TableCell><Badge className="bg-yellow-400">Pendente</Badge></TableCell>
                 <TableCell>Rafael Bueno</TableCell>
                 <TableCell>rafaelbuenorb02@gmail.com</TableCell>
@@ -68,7 +97,30 @@ export default function ContactView() {
                 <TableCell>Gostaria de saber mais sobre o Financiamento de Carro.</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell><Button variant="outline"><Bolt/></Button></TableCell>
+                <TableCell>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger>
+                      <Bolt/>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuLabel>
+                        Opções
+                      </DropdownMenuLabel>
+                      <DropdownMenuItem>
+                        Alterar situação
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        Chamar no WhatsApp
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        Editar contato
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        Excluir contato
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>  
+                </TableCell>
                 <TableCell><Badge className="bg-green-400">Atendido</Badge></TableCell>
                 <TableCell>Maria Clara</TableCell>
                 <TableCell>mariaclara@gmail.com</TableCell>
