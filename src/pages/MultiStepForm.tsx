@@ -3,7 +3,7 @@ import { Card, CardTitle, CardHeader, CardContent } from "@/components/ui/card";
 import { ContactRound, BriefcaseBusiness, Landmark } from "lucide-react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 
 import {
@@ -34,13 +34,15 @@ const formSchema = z.object({
   cpf: z.string().min(14, {message: "Ínsira um CPF válido!"}),
   nascimento: z.string().nonempty({message: "Este campo é obrigatório"}).min(10,{message: "Ínsira uma data válida!"}),
   cep: z.string().nonempty({message: "Este campo é obrigatório"}).min(9, {message: "Ínsira um CEP válido!"}),
-  renda: z.string(),
-  ocupacao: z.string(),
-  motivo: z.string(),
+  renda: z.string().nonempty({message: "Este campo é obrigatório"}),
+  ocupacao: z.string().nonempty({message: "Este campo é obrigatório"}),
+  motivo: z.string().nonempty({message: "Este campo é obrigatório"}),
+  garantia: z.string().nonempty({message: "Este campo é obrigatório"}),
 });
 
 export default function MultiStepForm() {
   const [step, setStep] = useState(0);
+  const stepTitle = ["Informações Gerais", "Análise de Perfil", "Análise de Garantia"]
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -54,7 +56,7 @@ export default function MultiStepForm() {
       renda: "",
       ocupacao: "",
       motivo: "",
-      
+      garantia: "",
     },
   });
 
@@ -64,34 +66,36 @@ export default function MultiStepForm() {
 
   return (
     <div className="flex flex-col items-center justify-center m-4 mt-12">
-      <h1 className="font-bold text-3xl text-slate-600">ZENITH CREDIT</h1>
-      <p className="text-slate-400">
-        Preencha o formulário corretamente seguindo as etapas.
-      </p>
-      <section>
+      <div className="flex flex-col text-center mb-8">
+        <h1 className="font-bold text-3xl text-slate-600 uppercase">Registro</h1>
+        <p className="text-slate-400">
+          Preencha o formulário corretamente seguindo as etapas.
+        </p>
+      </div>
+      <section className="w-full md:w-1/2">
         <Card>
           <CardHeader>
-            <div className="flex gap-12 justify-around mb-8 text-slate-300 w-full">
+            <div className="flex gap-12 justify-around mb-8 text-slate-300 w-full items-center">
               <ContactRound
                 className={step === 0 ? "text-blue-500" : ""}
-                size={40}
+                size={step === 0 ? 45 : 40}
               />
               <BriefcaseBusiness
                 className={step === 1 ? "text-blue-500" : ""}
-                size={40}
+                size={step === 1 ? 45 : 40}
               />
               <Landmark
                 className={step === 2 ? "text-blue-500" : ""}
-                size={40}
+                size={step === 2 ? 45 : 40}
               />
             </div>
-            <CardTitle>Informações Gerais</CardTitle>
+            <CardTitle>{stepTitle[step]}</CardTitle>
           </CardHeader>
           <CardContent>
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)}>
 {step == 0 && 
-  <div className="grid grid-cols-2 gap-4">
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
     <FormField
       control={form.control}
       name="nome"
@@ -174,7 +178,7 @@ export default function MultiStepForm() {
 }
 
                 {step == 1 && 
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                     <FormField
                       control={form.control}
                       name="renda"
@@ -182,13 +186,18 @@ export default function MultiStepForm() {
                         <FormItem>
                           <FormLabel>Renda Mensal</FormLabel>
                           <FormControl>
-                            <Select onValueChange={(value) => setValue("renda", value)}>
+                            <Select onValueChange={field.onChange} defaultValue={field.value} {...field}>
                               <SelectTrigger>
                                 <SelectValue placeholder="Selecione uma opção"/>
                               </SelectTrigger>
                               <SelectContent>
-                                <SelectItem value="teste1">Entre R$1.000 e R$2.000</SelectItem>
-                                <SelectItem value="teste2">Entre R$2.500 e R$4.000</SelectItem>
+                                <SelectItem value="Menos de R$1.000">Menos de R$1.000</SelectItem>
+                                <SelectItem value="Entre R$1.000 e R$2.000">Entre R$1.000 e R$2.000</SelectItem>
+                                <SelectItem value="Entre R$2.500 e R$4.000">Entre R$2.500 e R$4.000</SelectItem>
+                                <SelectItem value="Entre R$4.500 e R$7.000">Entre R$4.500 e R$7.000</SelectItem>
+                                <SelectItem value="Entre R$7.500 e R$12.000">Entre R$7.500 e R$12.000</SelectItem>
+                                <SelectItem value="Entre R$12.500 e R$20.000">Entre R$12.500 e R$20.000</SelectItem>
+                                <SelectItem value="Entre R$20.500 e R$40.000+">Entre R$20.500 e R$40.000+</SelectItem>
                               </SelectContent>
                             </Select>
                           </FormControl>
@@ -196,6 +205,84 @@ export default function MultiStepForm() {
                         </FormItem>
                       )}
                     />
+                    <FormField
+                      control={form.control}
+                      name="ocupacao"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Ocupação</FormLabel>
+                          <FormControl>
+                            <Select onValueChange={field.onChange} defaultValue={field.value} {...field}>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Selecione uma opção"/>
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="Assalariado(a) (CLT)">Assalariado(a) (CLT)</SelectItem>
+                                <SelectItem value="Autônomo(a)">Autônomo(a)</SelectItem>
+                                <SelectItem value="Empresário(a)">Empresário(a)</SelectItem>
+                                <SelectItem value="Funcionário(a) Público(a)">Funcionário(a) Público(a)</SelectItem>
+                                <SelectItem value="Aposentado(a)">Aposentado(a)</SelectItem>
+                                <SelectItem value="Profissional Liberal">Profissional Liberal</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </FormControl>
+                          <FormMessage/>
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="motivo"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Motivo do Empréstimo</FormLabel>
+                          <FormControl>
+                            <Select onValueChange={field.onChange} defaultValue={field.value} {...field}>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Selecione uma opção"/>
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="Pagar dívidas">Pagar dívidas</SelectItem>
+                                <SelectItem value="Reformar a Casa">Reformar a Casa</SelectItem>
+                                <SelectItem value="Investir">Investir</SelectItem>
+                                <SelectItem value="Financiar meu veículo">Financiar meu veículo</SelectItem>
+                                <SelectItem value="Adquirir bens">Adquirir bens</SelectItem>
+                                <SelectItem value="Refinanciar dívidas">Refinanciar dívidas</SelectItem>
+                                <SelectItem value="Só estou simulando">Só estou Simulando</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </FormControl>
+                          <FormMessage/>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                }
+                {step == 2 && 
+                  <div className="grid grid-cols-1 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="garantia"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Possui alguma garantia?</FormLabel>
+                          <FormControl>
+                            <Select onValueChange={field.onChange} defaultValue={field.value} {...field}>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Selecione uma opção"/>
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="Não">Não</SelectItem>
+                                <SelectItem value="Ímovel">Ímovel</SelectItem>
+                                <SelectItem value="Veículo">Veículo</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </FormControl>
+                          <FormMessage/>
+                        </FormItem>
+                      )}
+                    />
+                    <span></span>
                   </div>
                 }
                 <Button

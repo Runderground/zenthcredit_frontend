@@ -93,9 +93,7 @@ export default function RegisterView() {
 
               <div className="flex flex-col gap-2">
                 <h3 className="text-lg font-bold text-slate-400">Análise de Garantia</h3>
-                <span><strong className="font-semibold text-slate-600">Tipo :</strong> {u.tipo}</span>
-                <span><strong className="font-semibold text-slate-600">Placa :</strong> {u.placa}</span>
-                <span><strong className="font-semibold text-slate-600">Dono :</strong> {u.dono}</span>
+                <span><strong className="font-semibold text-slate-600">Possui garantia :</strong> {u.tipo}</span>
               </div>
             </CardContent>
           </Card>
