@@ -19,6 +19,14 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+
 const formSchema = z.object({
   nome: z.string().nonempty({message: "Este campo é obrigatório"}).min(3, {message: "Este campo deve conter pelo menos 3 caracteres."}).max(50, {message: "Você excedeu o limite de caracteres, abrevie o nome caso seja grande."}).regex(/^[a-zA-Z0-9\s]*$/, {message: "Não é permitido caracteres especiais"}),
   email: z.string().nonempty({message: "Este campo é obrigatório"}).email({message: "Insira um email válido!"}).min(4).max(100),
@@ -26,6 +34,9 @@ const formSchema = z.object({
   cpf: z.string().min(14, {message: "Ínsira um CPF válido!"}),
   nascimento: z.string().nonempty({message: "Este campo é obrigatório"}).min(10,{message: "Ínsira uma data válida!"}),
   cep: z.string().nonempty({message: "Este campo é obrigatório"}).min(9, {message: "Ínsira um CEP válido!"}),
+  renda: z.string(),
+  ocupacao: z.string(),
+  motivo: z.string(),
 });
 
 export default function MultiStepForm() {
@@ -171,116 +182,15 @@ export default function MultiStepForm() {
                         <FormItem>
                           <FormLabel>Renda Mensal</FormLabel>
                           <FormControl>
-                            <Input placeholder="R$ 000.000" {...field} />
-                          </FormControl>
-                          <FormMessage/>
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Email</FormLabel>
-                          <FormControl>
-                            <Input placeholder="exemplo@gmail.com" {...field} />
-                          </FormControl>
-                          <FormMessage/>
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="telefone"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Telefone</FormLabel>
-                          <FormControl>
-                            <Input placeholder="( DD ) 00000-0000" {...field} />
-                          </FormControl>
-                          <FormMessage/>
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                }
-
-                {step == 2 && 
-                  <div className="grid grid-cols-2 gap-4">
-                    <FormField
-                      control={form.control}
-                      name="nome"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Nome</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Escreva seu Nome" {...field} />
-                          </FormControl>
-                          <FormMessage/>
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Email</FormLabel>
-                          <FormControl>
-                            <Input placeholder="exemplo@gmail.com" {...field} />
-                          </FormControl>
-                          <FormMessage/>
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="telefone"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Telefone</FormLabel>
-                          <FormControl>
-                            <Input placeholder="( DD ) 00000-0000" {...field} />
-                          </FormControl>
-                          <FormMessage/>
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="cpf"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>CPF</FormLabel>
-                          <FormControl>
-                            <Input placeholder="000.000.000-00" {...field} />
-                          </FormControl>
-                          <FormMessage/>
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="nascimento"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Nascimento</FormLabel>
-                          <FormControl>
-                            <Input placeholder="00/00/0000" {...field} />
-                          </FormControl>
-                          <FormMessage/>
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="cep"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>CEP</FormLabel>
-                          <FormControl>
-                            <Input placeholder="00000-000" {...field} />
+                            <Select onValueChange={(value) => setValue("renda", value)}>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Selecione uma opção"/>
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="teste1">Entre R$1.000 e R$2.000</SelectItem>
+                                <SelectItem value="teste2">Entre R$2.500 e R$4.000</SelectItem>
+                              </SelectContent>
+                            </Select>
                           </FormControl>
                           <FormMessage/>
                         </FormItem>
