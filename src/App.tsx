@@ -10,7 +10,7 @@ import Dashboard from './pages/adminPages/Dashboard'
 import ContactView from './pages/adminPages/ContactView'
 import RegistersView from './pages/adminPages/RegistersView'
 import RegisterView from './pages/adminPages/RegisterView'
-import AnalisePerfil from './pages/multiStepForm/AnalisePerfil'
+import SimuladorDeEmprestimo from './pages/SimuladorDeEmprestimo'
 import MultiStepForm from './pages/MultiStepForm'
 
 function App() {
@@ -30,6 +30,7 @@ function App() {
           <Route path="/contato" element={<Contact/>} />
           <Route path="/sobre-nos" element={<About/>} />
           <Route path="/registro" element={<MultiStepForm/>} />
+          <Route path="/simular-emprestimo" element={<SimuladorDeEmprestimo/>} />
 
           {/* Rotas Privadas / Com necessidade de autenticação */}
 

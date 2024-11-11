@@ -6,9 +6,11 @@ import ApiSVG from '../assets/How_we_works/Aplication.svg'
 import DocSVG from '../assets/How_we_works/Documents.svg'
 import AprovedSVG from '../assets/How_we_works/Aproved.svg'
 import SupportSVG from '../assets/How_we_works/Support.svg'
+import { useNavigate } from 'react-router-dom'
 
 export default function Home() {
 
+  const navigate = useNavigate()
   const HowWeWorks = [
     {
       url: ApiSVG,
@@ -39,7 +41,8 @@ export default function Home() {
         <div>
           <h1 className="text-5xl lg:text-6xl font-bold text-slate-800 mb-2 font-normal">Simule seu empréstimo com a <strong className="underline decoration-blue-500">Zenith Credit</strong></h1>
           <p className="text-lg mb-4 text-slate-600">Com o nosso sistema, você <strong className="font-semibold bg-blue-500/30 p-0.5 rounded-md">poderá realizar simulações de empréstimo direto no site!</strong> Após isso poderá falar com algum de nossos consultores.</p>
-          <Button>Iniciar simulação</Button>
+            <Button onClick={() => navigate("../simular-emprestimo", {replace: true})} className="mr-2">Iniciar simulação</Button>
+            <Button onClick={() => navigate("../registro", {replace: true})} variant="secondary">Fazer registro</Button>
         </div>
         <img className="md:w-1/2 md:h-1/2 mb-4" src={HomeSvg} alt="Home SVG" height={400} width={400}/>
       </section>
