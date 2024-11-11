@@ -10,7 +10,8 @@ import {
 } from '@/components/ui/card'
 
 import {
-  CircleDollarSign
+  CircleDollarSign,
+  ChartArea
 } from 'lucide-react'
 
 import {
@@ -50,17 +51,17 @@ export default function SimuladorDeEmprestimo() {
 
     const parcela = valorTotal * (taxaMensal * Math.pow(1 + taxaMensal, parcelas)) / (Math.pow(1 + taxaMensal, parcelas) - 1);
 
-    return parcela.toFixed(2)
+    return Number(parcela.toFixed(2))
   }
 
   let parcelas = calcularParcela(valor, juros, meses)
 
-  function calcularTotalComJuros(valorComJuros: number, parcelas: number) {
-    const total = valorComJuros * parcelas
-    return total.toFixed(2).toString()
+  function calcularTotalComJuros(valorComJuros: number | string, parcelas: number) {
+    const total = Number(valorComJuros) * parcelas
+    return Number(total.toFixed(2))
   }
 
-  let TotalComJuros = calcularTotalComJuros(parcelas, meses)
+  let totalComJuros = calcularTotalComJuros(parcelas, meses)
   
   return (
     <section className="m-4 mt-12 flex flex-col items-center">
@@ -124,25 +125,29 @@ export default function SimuladorDeEmprestimo() {
           </CardContent>
         </Card>
         <Card>
-          <CardHeader className="text-slate-600">
+          <CardHeader className="flex flex-row items-center justify-between text-slate-600">
             <CardTitle>Resultado</CardTitle>
+            <ChartArea/>
           </CardHeader>
-          <CardContent className="flex flex-col items-center justify-center">
-            <h1 className="text-2xl font-semibold text-slate-600 text-center">Pagamento Mensal</h1>
+          <CardContent className="flex flex-col gap-4 items-center justify-center">
+            <h1 className="text-2xl font-semibold text-slate-600 text-center">Parcelas Mensais</h1>
             <h2 className="text-4xl font-bold text-blue-500"> {parcelas.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</h2>
             <span className="text-slate-300 font-semibold text-sm">taxas de juros incluídos</span>
-            <div className="flex w-full justify-between">
+            <div className="grid mt-4 grid-cols-1 gap-4">
               
-            <div className="flex flex-col items-center bg-slate-200 p-4 rounded-lg">
+            <div className="flex flex-col gap-2 items-center bg-slate-200 p-4 rounded-lg">
               <span className="text-sm font-semibold text-slate-400">Valor do empréstimo</span>
               <h2 className="text-3xl text-slate-600 text-center font-bold">{valor.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</h2>
             </div>
 
-              <div className="flex flex-col items-center bg-slate-200 p-4 rounded-lg">
-                <span className="text-sm font-semibold text-slate-400">Valor do empréstimo</span>
-                <h2 className="text-3xl text-slate-600 text-center font-bold">{TotalComJuros.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</h2>
+              <div className="flex gap-2 flex-col items-center bg-blue-200 p-4 rounded-lg">
+                <span className="text-sm font-semibold text-blue-400">Valor total á pagar</span>
+                <h2 className="text-3xl text-blue-500 text-center font-bold">{totalComJuros.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</h2>
               </div>
             </div>
+            <br/>
+            <Button className="w-1/2">Fazer cadastro</Button>
+            <p className="text-md text-slate-400 font-semibold">Ficou interessado? Faça seu cadastro para algum de nossos consultores entrar em contato.</p>
           </CardContent>
         </Card>
       </div>
