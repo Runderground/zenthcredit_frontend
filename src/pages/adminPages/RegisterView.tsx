@@ -14,8 +14,6 @@ import {
   ChevronLeft
 } from 'lucide-react'
 
-import { Button } from '@/components/ui/button'
-
 export default function RegisterView() {
   const location = useParams()
   console.log(location)
