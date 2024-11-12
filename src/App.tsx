@@ -12,6 +12,7 @@ import RegistersView from './pages/adminPages/RegistersView'
 import RegisterView from './pages/adminPages/RegisterView'
 import SimuladorDeEmprestimo from './pages/SimuladorDeEmprestimo'
 import MultiStepForm from './pages/MultiStepForm'
+import VehicleGuaranteeLoan from './pages/loanPages/VehicleGuaranteeLoan'
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
           <Route path="/sobre-nos" element={<About/>} />
           <Route path="/registro" element={<MultiStepForm/>} />
           <Route path="/simular-emprestimo" element={<SimuladorDeEmprestimo/>} />
+          <Route path="/emprestimos/garantia-veiculo" element={<VehicleGuaranteeLoan/>}/>
+          <Route path="/emprestimos/garantia-imovel" element={<VehicleGuaranteeLoan/>}/>
 
           {/* Rotas Privadas / Com necessidade de autenticação */}
 

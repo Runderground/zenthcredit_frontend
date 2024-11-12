@@ -1,3 +1,6 @@
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+
 import {
   Card,
   CardHeader,
@@ -27,8 +30,53 @@ import {
   useNavigate
 } from 'react-router-dom'
 
+const API = import.meta.env.VITE_API_URL
+
+type Register = {
+  _id: string,
+  nome: string,
+    email: string,
+    telefone: string,
+    cpf: string,
+    nascimento: string,
+    renda: string,
+    ocupacao: string,
+    motivo: string,
+    garantia: string,
+    cep: string,
+}
 
 export default function RegistersView() {
+
+  const [registers, setRegisters] = useState<Register[]>([])
+  const [searchEmail, setSearchEmail] = useState('')
+  const [page, setPage] = useState(1)
+  console.log(searchEmail)
+
+  useEffect(() => {
+    async function fetchData() {
+      const { data } = await axios.get(`${API}/cadastros/`)
+      console.log(data)
+      setRegisters(data)
+    }
+    fetchData()
+  },[])
+
+  const searchByEmail = async () => {
+    
+    if(searchEmail === '') {
+      console.log("Vazio")
+      return
+    }
+    try {
+    const { data } = await axios.get(`${API}/cadastros/find_user_unique?email=${searchEmail}`)
+    
+    navigate(`../admin/cadastros/${data._id}`)
+    } catch (error: any) {
+      console.log(error.response.data.error)
+    }
+    }
+  
   const navigate = useNavigate()
   return (
     <div className="m-6 mt-12">
@@ -39,8 +87,8 @@ export default function RegistersView() {
         <div className="flex flex-col lg:flex-row gap-4 justify-between items-center">
           <CardTitle>Todos os usuários cadastrados</CardTitle>
           <div className="flex gap-2">
-            <Input className="w-56" placeholder="Pesquise pelo email"/>
-            <Button><Search/></Button>
+            <Input onChange={(e) => {setSearchEmail(e.target.value)}} className="w-56" placeholder="Pesquise pelo email"/>
+            <Button onClick={searchByEmail}><Search/></Button>
           </div>
         </div>
       </CardHeader>
@@ -59,27 +107,19 @@ export default function RegistersView() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow>
-                <TableCell>Rafael Bueno</TableCell>
-                <TableCell>rafaelbuenorb02@gmail.com</TableCell>
-                <TableCell>(11) 99418-7606</TableCell>
-                <TableCell>123.456.789-10</TableCell>
-                <TableCell>22-04-2007</TableCell>
-              </TableRow>
-              <TableRow className="cursor-pointer" onClick={() => navigate("../admin/cadastros/1", {replace: true})}>
-                <TableCell>Joao Pedro</TableCell>
-                <TableCell>joaopedro@gmail.com</TableCell>
-                <TableCell>(12) 12345-67890</TableCell>
-                <TableCell>123.456.789-10</TableCell>
-                <TableCell>15-02-1999</TableCell>
-              </TableRow>
-              <TableRow className="cursor-pointer" onClick={() => navigate("../admin/cadastros/2", {replace: true})}>
-                <TableCell>Maria Clara</TableCell>
-                <TableCell>maria_clara@gmail.com</TableCell>
-                <TableCell>(43) 91238-1244</TableCell>
-                <TableCell>123.456.789-10</TableCell>
-                <TableCell>12-06-2000</TableCell>
-              </TableRow>
+              {registers ? registers.map(register => (
+                <TableRow key={register._id} className="cursor-pointer" onClick={() => navigate(`../admin/cadastros/${register._id}`, {replace: true})}>
+                  <TableCell>{register.nome}</TableCell>
+                  <TableCell>{register.email}</TableCell>
+                  <TableCell>{register.telefone}</TableCell>
+                  <TableCell>{register.cpf}</TableCell>
+                  <TableCell>{register.nascimento}</TableCell>
+                </TableRow>
+              )) : <TableRow><TableCell>Carregando...</TableCell>
+              <TableCell>Carregando...</TableCell>
+              <TableCell>Carregando...</TableCell>
+              <TableCell>Carregando...</TableCell>
+              <TableCell>Carregando...</TableCell></TableRow>}
             </TableBody>
           </Table>
         </CardContent>
