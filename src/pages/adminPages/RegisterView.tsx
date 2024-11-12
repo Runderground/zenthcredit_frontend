@@ -6,7 +6,13 @@ import { Link, useParams } from "react-router-dom";
 
 import { Card, CardTitle, CardHeader, CardContent } from "@/components/ui/card";
 
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, Trash } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import toast from "react-hot-toast";
+
+import { useNavigate } from "react-router-dom";
+
+const navigate = useNavigate();
 
 export default function RegisterView() {
   const location = useParams();
@@ -35,6 +41,19 @@ export default function RegisterView() {
     fetchData();
   }, []);
 
+  const deleteUser = async () => {
+    try {
+      await axios.delete(
+        `${import.meta.env.VITE_API_URL}/cadastros/delete/${user._id}`,
+      );
+      toast.success("Usuário deletado com sucesso");
+      navigate("../admin/cadastros/", { replace: true });
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error.response.data.error);
+    }
+  };
+
   return (
     <>
       <section className="m-4 mt-12">
@@ -45,10 +64,16 @@ export default function RegisterView() {
           <h1 className="text-2xl font-semibold">Consulta de cadastro</h1>
         </div>
         <Card>
-          <CardHeader>
+          <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle className="text-lg text-blue-500">
               ID: {user._id}
             </CardTitle>
+            <Button
+              className="bg-red-400 hover:bg-red-500"
+              onClick={deleteUser}
+            >
+              <Trash />
+            </Button>
           </CardHeader>
           <CardContent className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="flex flex-col gap-2">
