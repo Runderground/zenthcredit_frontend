@@ -13,6 +13,7 @@ import RegisterView from './pages/adminPages/RegisterView'
 import SimuladorDeEmprestimo from './pages/SimuladorDeEmprestimo'
 import MultiStepForm from './pages/MultiStepForm'
 import VehicleGuaranteeLoan from './pages/loanPages/VehicleGuaranteeLoan'
+import toast, { Toaster } from 'react-hot-toast'
 
 function App() {
   return (
@@ -44,6 +45,22 @@ function App() {
         </Routes>
         <WhatsAppButton/>
         <Footer/>
+        <Toaster 
+          position="bottom-right"
+          toastOptions={{
+            error: {
+              style: {
+                background: 'rgba(255,100,100)',
+                color: 'white'
+              }
+            },
+            success: {
+              style: {
+                background: 'rgba(50, 200 , 50)',
+                color: 'white'
+              }
+            }
+          }}/>
       </main>  
       </SidebarProvider>
     </BrowserRouter>
