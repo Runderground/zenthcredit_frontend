@@ -12,39 +12,74 @@ import { BsWhatsapp } from "react-icons/bs";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "@/context/authContext";
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { useNavigate } from 'react-router-dom'
+
+type Register = {
+  _id: string;
+  nome: string;
+  email: string;
+  telefone: string;
+  cpf: string;
+  nascimento: string;
+  renda: string;
+  ocupacao: string;
+  motivo: string;
+  garantia: string;
+  cep: string;
+};
+
+interface IContact {
+  _id: string;
+  nome: string;
+  email: string;
+  telefone: string;
+  status: string;
+  comentario: string;
+}
 
 export default function Dashboard() {
   const { token } = useAuth();
-
+  const navigate = useNavigate()
   const [cadastroTotal, setCadastroTotal] = useState<number>(0);
   const [adminTotal, setAdminTotal] = useState<number>(0);
   const [contatoTotal, setContatoTotal] = useState<number>(0);
-  const [ultimosContatos, setUltimosContatos] = useState([])
-  const [ultimosCadastros, setUltimosCadastros] = useState([])
+  const [ultimosContatos, setUltimosContatos] = useState<IContact[]>([])
+  const [ultimosCadastros, setUltimosCadastros] = useState<Register[]>([])
 
   useEffect(() => {
     async function getUltimosCadastros() {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/cadastros/?page=1?limit=10`,
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
+      try {
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_API_URL}/cadastros/?page=1?limit=10`,
+          {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
           },
-        },
-      );
-      setCadastroTotal(data);
+        );
+        setUltimosCadastros(data.cadastros);
+      } catch(error) {
+        console.error(error)
+      }
     }
+    getUltimosCadastros()
     async function getUltimosContatos() {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/contatos/?page=1?limit=10`,
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
+      try {
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_API_URL}/contatos/?page=1?limit=10`,
+          {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
           },
-        },
-      );
-      setContatoTotal(data);
+        );
+        setUltimosContatos(data.contacts);
+      } catch(error) {
+        console.error(error)
+      }
     }
+    getUltimosContatos()
   }, []);
 
   useEffect(() => {
@@ -85,6 +120,13 @@ export default function Dashboard() {
     getAdminTotal();
     getContatoTotal();
   },[])
+
+  const handleWhatsapp = (num: string) => {
+    const number = num.replace(/\D/g, "");
+    const url = `https://wa.me/+55${number}`;
+
+    window.open(url)
+  }
 
   const Items = [
     {
@@ -143,22 +185,25 @@ export default function Dashboard() {
               Aqui está a lista dos últimos 10 usuários que fizeram o cadastro.
             </CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className="flex items-center p-2 border border-slate-300 rounded-lg gap-4 justify-between">
-              <div className="flex gap-2 items-center">
-                <img
-                  className="w-8 h-8 rounded-full"
-                  src="https://github.com/Runderground.png"
-                />
-                <div className="flex flex-col">
-                  <h4 className="font-bold text-slate-700">Rafael Bueno</h4>
-                  <span className="text-slate-500 text-sm">
-                    (11) 99418-7606
-                  </span>
-                </div>
-              </div>
-              <Button className="bg-blue-500 hover:bg-blue-600">Ver</Button>
+          <CardContent className="flex flex-col gap-2">
+            {ultimosCadastros ? (
+      ultimosCadastros.map((cadastro) => (
+        <div className="flex items-center p-2 border border-slate-300 rounded-lg gap-4 justify-between">
+          <div className="flex gap-2 items-center">
+            <Avatar>
+              <AvatarFallback className="bg-blue-400 text-white font-semibold">{cadastro.nome.charAt(0)}</AvatarFallback>
+            </Avatar>
+            <div className="flex flex-col">
+              <h4 className="font-bold text-slate-700">{cadastro.nome}</h4>
+              <span className="text-slate-500 text-sm">
+                {cadastro.email}
+              </span>
             </div>
+          </div>
+          <Button className="bg-blue-500 hover:bg-blue-600">Ver</Button>
+        </div>
+      ))
+            ) : "Não há cadastros"}
           </CardContent>
         </Card>
         <Card>
@@ -173,27 +218,29 @@ export default function Dashboard() {
               Aqui está a lista dos últimos 10 usuários que fizeram o cadastro.
             </CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className="flex items-center p-2 border border-slate-300 rounded-lg gap-4 justify-between">
-              <div className="flex gap-2 items-center">
-                <img
-                  className="w-8 h-8 rounded-full"
-                  src="https://github.com/Runderground.png"
-                />
-                <div className="flex flex-col">
-                  <h4 className="font-bold text-slate-700">Rafael Bueno</h4>
-                  <span className="text-slate-500 text-sm">
-                    (11) 99418-7606
-                  </span>
-                </div>
-              </div>
-              <div className="flex flex-col lg:flex-row gap-2 gap-2 items-center">
-                <Button>Ver</Button>
-                <Button className="bg-green-400 hover:bg-green-500">
-                  <BsWhatsapp />
-                </Button>
-              </div>
+          <CardContent className="flex flex-col gap-2">
+            {ultimosContatos ? (
+      ultimosContatos.map((contato) => (
+        <div className="flex items-center p-2 border border-slate-300 rounded-lg gap-4 justify-between">
+          <div className="flex gap-2 items-center">
+            <Avatar>
+            <AvatarFallback className="bg-green-400 text-white font-semibold">{contato.nome.charAt(0)}</AvatarFallback>
+            </Avatar>
+            <div className="flex flex-col">
+              <h4 className="font-bold text-slate-700">{contato.nome}</h4>
+              <span className="text-slate-500 text-sm">
+                {contato.telefone}
+              </span>
             </div>
+          </div>
+          <div className="flex flex-col lg:flex-row gap-2 gap-2 items-center">
+            <Button onClick={() => handleWhatsapp(contato.telefone)}className="bg-green-400 hover:bg-green-500">
+              <BsWhatsapp />
+            </Button>
+          </div>
+        </div>
+              ))
+            )  : 'Nenhum contato encontrado'}
           </CardContent>
         </Card>
       </section>

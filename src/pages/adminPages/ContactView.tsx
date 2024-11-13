@@ -78,6 +78,13 @@ export default function ContactView() {
     fetchData();
   }, [currentPage]);
 
+  const handleWhatsapp = (num: string) => {
+    const number = num.replace(/\D/g, "");
+    const url = `https://wa.me/+55${number}`;
+
+    window.open(url)
+  }
+
   const changeStatus = async (id: string) => {
     try {
       const { data } = await axios.patch(
@@ -172,10 +179,9 @@ export default function ContactView() {
                             >
                               Alterar situação
                             </DropdownMenuItem>
-                            <DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => handleWhatsapp(contact.telefone)}>
                               Chamar no WhatsApp
                             </DropdownMenuItem>
-                            <DropdownMenuItem>Editar contato</DropdownMenuItem>
                             <Dialog>
                               <DialogTrigger className="p-1 text-sm hover:bg-slate-100 w-full text-start rounded">
                                 <span className="ml-1">Deletar contato</span>
