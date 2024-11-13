@@ -61,19 +61,22 @@ interface IContact {
 
 export default function ContactView() {
   const [contacts, setContacts] = useState<IContact[]>([])
+  const [currentPage, setCurrentPage] = useState<number>(1)
+  const [totalPages, setTotalPages] = useState<number>(1)
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/contatos/`)
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/contatos/?page=${currentPage}&limit=5`)
         console.log(data)
-        setContacts(data)
+        setTotalPages(data.totalPages)
+        setContacts(data.contacts)
       } catch(error) {
         console.log(error)
       }
     }
     fetchData()
-  },[])
+  },[currentPage])
 
   const changeStatus = async(id: string) => {
     try {
@@ -92,6 +95,18 @@ export default function ContactView() {
       } catch (error) {
         console.log(error)
       }
+  }
+
+  const pagePrevious = () => {
+    if(currentPage > 1) {
+      setCurrentPage(currentPage - 1)
+    }
+  }
+
+  const pageNext = () => {
+    if(currentPage < totalPages) {
+      setCurrentPage(currentPage + 1)
+    }
   }
   
   return (
@@ -173,9 +188,9 @@ export default function ContactView() {
       </Card>
     </section>
       <div className="flex items-center gap-8 justify-center mt-4">
-        <Button variant="outline"><ChevronLeft/></Button>
-        <span className="font-bold"> 1 </span>
-        <Button variant="outline"><ChevronRight/></Button>
+        {currentPage > 1 && <Button onClick={pagePrevious} variant="outline"><ChevronLeft/></Button>}
+        <span className="font-bold">{currentPage}</span>
+        {currentPage < totalPages && <Button onClick={pageNext} variant="outline"><ChevronRight/></Button>}
       </div>
     </div>
   )

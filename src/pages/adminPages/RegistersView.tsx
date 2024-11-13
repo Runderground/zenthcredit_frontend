@@ -5,7 +5,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, ChevronLeft, ChevronRight, Trash } from "lucide-react";
+import { Search, ChevronLeft, ChevronRight } from "lucide-react";
 import toast from 'react-hot-toast'
 
 import {
@@ -17,6 +17,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+
+import { Skeleton } from '@/components/ui/skeleton';
 
 import { useNavigate } from "react-router-dom";
 
@@ -39,17 +41,34 @@ type Register = {
 export default function RegistersView() {
   const [registers, setRegisters] = useState<Register[]>([]);
   const [searchEmail, setSearchEmail] = useState("");
-  const [page, setPage] = useState(1);
-  console.log(searchEmail);
+  const [currentPage, setCurrentPage] = useState<number>(1)
+  const [totalPages, setTotalPages] = useState<number>(1)
 
   useEffect(() => {
     async function fetchData() {
-      const { data } = await axios.get(`${API}/cadastros/`);
-      console.log(data);
-      setRegisters(data);
+      try {
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/cadastros/?page=${currentPage}&limit=5`)
+        console.log(data)
+        setTotalPages(data.totalPages)
+        setRegisters(data.cadastros)
+      } catch(error) {
+        console.log(error)
+      }
     }
-    fetchData();
-  }, []);
+    fetchData()
+  },[currentPage])
+
+  const pagePrevious = () => {
+    if(currentPage > 1) {
+      setCurrentPage(currentPage - 1)
+    }
+  }
+
+  const pageNext = () => {
+    if(currentPage < totalPages) {
+      setCurrentPage(currentPage + 1)
+    }
+  }
 
   const searchByEmail = async () => {
     if (searchEmail === "") {
@@ -130,13 +149,36 @@ export default function RegistersView() {
                     </TableRow>
                   ))
                 ) : (
-                  <TableRow>
-                    <TableCell>Carregando...</TableCell>
-                    <TableCell>Carregando...</TableCell>
-                    <TableCell>Carregando...</TableCell>
-                    <TableCell>Carregando...</TableCell>
-                    <TableCell>Carregando...</TableCell>
-                  </TableRow>
+                  <>
+                    <TableRow>
+                      <TableCell><Skeleton className="w-[100px] h-[20px]"/></TableCell>
+                      <TableCell><Skeleton className="w-[100px] h-[20px]"/></TableCell>
+                      <TableCell><Skeleton className="w-[100px] h-[20px]"/></TableCell>
+                      <TableCell><Skeleton className="w-[100px] h-[20px]"/></TableCell>
+                      <TableCell><Skeleton className="w-[100px] h-[20px]"/></TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell><Skeleton className="w-[100px] h-[20px]"/></TableCell>
+                      <TableCell><Skeleton className="w-[100px] h-[20px]"/></TableCell>
+                      <TableCell><Skeleton className="w-[100px] h-[20px]"/></TableCell>
+                      <TableCell><Skeleton className="w-[100px] h-[20px]"/></TableCell>
+                      <TableCell><Skeleton className="w-[100px] h-[20px]"/></TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell><Skeleton className="w-[100px] h-[20px]"/></TableCell>
+                      <TableCell><Skeleton className="w-[100px] h-[20px]"/></TableCell>
+                      <TableCell><Skeleton className="w-[100px] h-[20px]"/></TableCell>
+                      <TableCell><Skeleton className="w-[100px] h-[20px]"/></TableCell>
+                      <TableCell><Skeleton className="w-[100px] h-[20px]"/></TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell><Skeleton className="w-[100px] h-[20px]"/></TableCell>
+                      <TableCell><Skeleton className="w-[100px] h-[20px]"/></TableCell>
+                      <TableCell><Skeleton className="w-[100px] h-[20px]"/></TableCell>
+                      <TableCell><Skeleton className="w-[100px] h-[20px]"/></TableCell>
+                      <TableCell><Skeleton className="w-[100px] h-[20px]"/></TableCell>
+                    </TableRow>
+                  </>
                 )}
               </TableBody>
             </Table>
@@ -144,13 +186,9 @@ export default function RegistersView() {
         </Card>
       </section>
       <div className="flex items-center gap-8 justify-center mt-4">
-        <Button variant="outline">
-          <ChevronLeft />
-        </Button>
-        <span className="font-bold"> 1 </span>
-        <Button variant="outline">
-          <ChevronRight />
-        </Button>
+        {currentPage > 1 && <Button onClick={pagePrevious} variant="outline"><ChevronLeft/></Button>}
+        <span className="font-bold">{currentPage}</span>
+        {currentPage < totalPages && <Button onClick={pageNext} variant="outline"><ChevronRight/></Button>}
       </div>
     </div>
   );
