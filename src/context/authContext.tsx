@@ -36,7 +36,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       const zenithToken = localStorage.getItem("@zenithcredit:token");
       if (zenithToken) {
         try {
-          const { data } = await axios.get(
+          const {data} = await axios.get(
             `${import.meta.env.VITE_API_URL}/admins/verify`,
             {
               headers: {
@@ -44,7 +44,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
               },
             },
           );
-          console.log(data.success);
+          console.log(data.success)
         } catch (error) {
           console.log(error);
           setUser(null);

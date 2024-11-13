@@ -19,13 +19,21 @@ import {
   DialogTrigger
 } from '@/components/ui/dialog'
 
+import { useAuth } from '@/context/authContext'
+
 export default function RegisterView() {
+
+  const { token } = useAuth()
 
   const navigate = useNavigate()
   
   const deleteUser = async (id: string) => {
       try {
-        const { data } = await axios.delete(`${import.meta.env.VITE_API_URL}/cadastros/delete/${id}`)
+        const { data } = await axios.delete(`${import.meta.env.VITE_API_URL}/cadastros/delete/${id}`, {
+          headers: {
+            authorization: `Bearer ${token}`
+          },
+        },)
         toast.success(data.success)
         navigate("../admin/cadastros/", {replace: true})
       } catch (error) {
@@ -51,7 +59,11 @@ export default function RegisterView() {
   useEffect(() => {
     async function fetchData() {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/cadastros/find_user_unique?id=${location.id}`,
+        `${import.meta.env.VITE_API_URL}/cadastros/find_user_unique?id=${location.id}`, {
+          headers: {
+            authorization: `Bearer ${token}`
+          },
+        },
       );
       console.log(data);
       setUser(data);
