@@ -14,13 +14,14 @@ import SimuladorDeEmprestimo from "./pages/SimuladorDeEmprestimo";
 import MultiStepForm from "./pages/MultiStepForm";
 import VehicleGuaranteeLoan from "./pages/loanPages/VehicleGuaranteeLoan";
 import { Toaster } from "react-hot-toast";
-import { AuthProvider } from "./context/authContext";
 import AdminLogin from "./pages/AdminLogin";
+import { useAuth } from './context/authContext'
 
 function App() {
+  
+  const {token} = useAuth()
   return (
     <BrowserRouter>
-      <AuthProvider>
         <SidebarProvider>
           <SideBar />
           <main className="w-full h-full">
@@ -51,15 +52,15 @@ function App() {
               />
               <Route
                 path="/acessar/admin"
-                element={<AdminLogin />}
+                element={token ? <Dashboard/> : <AdminLogin />}
               />
 
               {/* Rotas Privadas / Com necessidade de autenticação */}
 
-              <Route path="/admin/painel" element={<Dashboard />} />
-              <Route path="/admin/contatos" element={<ContactView />} />
-              <Route path="/admin/cadastros" element={<RegistersView />} />
-              <Route path="/admin/cadastros/:id" element={<RegisterView />} />
+              <Route path="/admin/painel" element={token ? <Dashboard /> : <Home />} />
+              <Route path="/admin/contatos" element={token ? <ContactView/> : <Home/>} />
+              <Route path="/admin/cadastros" element={token ? <RegistersView /> : <Home/>} />
+              <Route path="/admin/cadastros/:id" element={token ? <RegisterView /> : <Home/>} />
             </Routes>
             <WhatsAppButton />
             <Footer />
@@ -82,7 +83,6 @@ function App() {
             />
           </main>
         </SidebarProvider>
-      </AuthProvider>
     </BrowserRouter>
   );
 }

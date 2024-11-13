@@ -10,6 +10,7 @@ import {
   SidebarMenuButton,
   SidebarMenuSubButton,
   SidebarMenuSub,
+  SidebarFooter
 } from "@/components/ui/sidebar";
 import {
   Collapsible,
@@ -196,12 +197,12 @@ export default function SideBar() {
                           <span>Deletar Administrador</span>
                         </Link>
                       </SidebarMenuSubButton>
-                      <SidebarMenuSubButton asChild>
+                      {/* <SidebarMenuSubButton asChild>
                         <Link to="">
                           <UserPen />
                           <span>Editar Administrador</span>
                         </Link>
-                      </SidebarMenuSubButton>
+                      </SidebarMenuSubButton> */}
                     </SidebarMenuSub>
                   </CollapsibleContent>
                 </SidebarMenuItem>
@@ -210,6 +211,9 @@ export default function SideBar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        Testando
+      </SidebarFooter>
     </Sidebar>
   );
 }
