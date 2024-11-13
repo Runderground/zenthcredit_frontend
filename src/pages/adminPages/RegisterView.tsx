@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import axios from "axios";
 
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 import { Card, CardTitle, CardHeader, CardContent } from "@/components/ui/card";
 
@@ -10,11 +10,29 @@ import { ChevronLeft, Trash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
 
-import { useNavigate } from "react-router-dom";
-
-const navigate = useNavigate();
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from '@/components/ui/dialog'
 
 export default function RegisterView() {
+
+  const navigate = useNavigate()
+  
+  const deleteUser = async (id: string) => {
+      try {
+        const { data } = await axios.delete(`${import.meta.env.VITE_API_URL}/cadastros/delete/${id}`)
+        toast.success(data.success)
+        navigate("../admin/cadastros/", {replace: true})
+      } catch (error) {
+        console.log(error)
+      }
+  }
+  
   const location = useParams();
   const [user, setUser] = useState({
     _id: "",
@@ -41,18 +59,6 @@ export default function RegisterView() {
     fetchData();
   }, []);
 
-  const deleteUser = async () => {
-    try {
-      await axios.delete(
-        `${import.meta.env.VITE_API_URL}/cadastros/delete/${user._id}`,
-      );
-      toast.success("Usuário deletado com sucesso");
-      navigate("../admin/cadastros/", { replace: true });
-    } catch (error: any) {
-      console.log(error);
-      toast.error(error.response.data.error);
-    }
-  };
 
   return (
     <>
@@ -68,12 +74,25 @@ export default function RegisterView() {
             <CardTitle className="text-lg text-blue-500">
               ID: {user._id}
             </CardTitle>
-            <Button
-              className="bg-red-400 hover:bg-red-500"
-              onClick={deleteUser}
-            >
-              <Trash />
-            </Button>
+            <Dialog>
+              <DialogTrigger>
+                <Button
+                className="bg-red-400 hover:bg-red-500"
+              >
+                <Trash />
+              </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Tem certeza que deseja <strong className="text-red-500">Deletar?</strong></DialogTitle>
+                  <DialogDescription>
+                    Você tem certeza que gostaria de deletar <strong>{user.nome}</strong> dos cadastros?
+                  </DialogDescription>
+                </DialogHeader>
+                  <Button className="bg-red-400 hover:bg-red-500"
+                    onClick={() => deleteUser(user._id)}>Deletar</Button>
+              </DialogContent>
+            </Dialog>
           </CardHeader>
           <CardContent className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="flex flex-col gap-2">
@@ -120,7 +139,7 @@ export default function RegisterView() {
                 <strong className="font-semibold text-slate-600">
                   Renda Mensal :
                 </strong>{" "}
-                R$ {user.renda}
+                {user.renda}
               </span>
               <span>
                 <strong className="font-semibold text-slate-600">

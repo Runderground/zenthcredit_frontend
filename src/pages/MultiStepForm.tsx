@@ -6,6 +6,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import axios from 'axios'
+
+import { useNavigate } from 'react-router-dom'
+
+import InputMask from 'react-input-mask'
+
 import {
   Form,
   FormControl,
@@ -14,6 +20,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+
+import toast from 'react-hot-toast'
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -28,11 +36,11 @@ import {
 } from '@/components/ui/select'
 
 const formSchema = z.object({
-  nome: z.string().nonempty({message: "Este campo é obrigatório"}).min(3, {message: "Este campo deve conter pelo menos 3 caracteres."}).max(50, {message: "Você excedeu o limite de caracteres, abrevie o nome caso seja grande."}).regex(/^[a-zA-Z0-9\s]*$/, {message: "Não é permitido caracteres especiais"}),
+  nome: z.string().nonempty({message: "Este campo é obrigatório"}).min(3, {message: "Este campo deve conter pelo menos 3 caracteres."}).max(50, {message: "Você excedeu o limite de caracteres, abrevie o nome caso seja grande."}).regex(/^[a-zA-Z\s]*$/, {message: "Não é permitido caracteres especiais e números."}),
   email: z.string().nonempty({message: "Este campo é obrigatório"}).email({message: "Insira um email válido!"}).min(4).max(100),
   telefone: z.string().nonempty({message: "Este campo é obrigatório"}).min(15,{message: "Insira um número válido!"}),
   cpf: z.string().min(14, {message: "Ínsira um CPF válido!"}),
-  nascimento: z.string().nonempty({message: "Este campo é obrigatório"}).min(10,{message: "Ínsira uma data válida!"}),
+  nascimento: z.string().nonempty({message: "Este campo é obrigatório"}).min(10,{message: "Ínsira uma data válida!"}).regex(/^(0[1-9]|[12][0-9]|3[01])\/(02)\/(19\d{2}|200[0-7])$|^(0[1-9]|[12][0-9]|30)\/(04|06|09|11)\/(19\d{2}|200[0-7])$|^(0[1-9]|[12][0-9]|3[01])\/(01|03|05|07|08|10|12)\/(19\d{2}|200[0-7])$/, {message: "Data ínvalida ou menor de 18 anos"}),
   cep: z.string().nonempty({message: "Este campo é obrigatório"}).min(9, {message: "Ínsira um CEP válido!"}),
   renda: z.string().nonempty({message: "Este campo é obrigatório"}),
   ocupacao: z.string().nonempty({message: "Este campo é obrigatório"}),
@@ -42,7 +50,10 @@ const formSchema = z.object({
 
 export default function MultiStepForm() {
   const [step, setStep] = useState(0);
+  const [loading, setLoading] = useState(false)
   const stepTitle = ["Informações Gerais", "Análise de Perfil", "Análise de Garantia"]
+
+  const navigate = useNavigate()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -61,7 +72,19 @@ export default function MultiStepForm() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    setLoading(true)
+    async function RegisterUser() {
+      try {
+        const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/cadastros/register`, values)
+        toast.success(data.success)
+        setLoading(false)
+        navigate("../", {replace: true})
+      } catch(error: any) {
+        setLoading(false)
+        toast.error(error.response.data.error)
+      }
+    }
+    RegisterUser()
   }
 
   return (
@@ -127,9 +150,13 @@ export default function MultiStepForm() {
       name="telefone"
       render={({ field }) => (
         <FormItem>
-          <FormLabel>Telefone</FormLabel>
+          <FormLabel>Telefone / WhatsApp</FormLabel>
           <FormControl>
-            <Input placeholder="( DD ) 00000-0000" {...field} />
+            <InputMask mask="(99) 99999-9999" {...field}>
+              {() => (
+            <Input placeholder="(DD) 99999-9999" {...field}/>
+              )}
+            </InputMask>
           </FormControl>
           <FormMessage/>
         </FormItem>
@@ -142,7 +169,11 @@ export default function MultiStepForm() {
         <FormItem>
           <FormLabel>CPF</FormLabel>
           <FormControl>
-            <Input placeholder="000.000.000-00" {...field} />
+            <InputMask mask="999.999.999-99" {...field}>
+              {() => (
+            <Input placeholder="000.000.000-00" {...field}/>
+              )}
+            </InputMask>
           </FormControl>
           <FormMessage/>
         </FormItem>
@@ -155,7 +186,11 @@ export default function MultiStepForm() {
         <FormItem>
           <FormLabel>Nascimento</FormLabel>
           <FormControl>
-            <Input placeholder="00/00/0000" {...field} />
+            <InputMask mask="99/99/9999" {...field}>
+              {() => (
+            <Input placeholder="00/00/0000" {...field}/>
+              )}
+            </InputMask>
           </FormControl>
           <FormMessage/>
         </FormItem>
@@ -168,7 +203,11 @@ export default function MultiStepForm() {
         <FormItem>
           <FormLabel>CEP</FormLabel>
           <FormControl>
-            <Input placeholder="00000-000" {...field} />
+            <InputMask mask="99999-999" {...field}>
+              {() => (
+            <Input placeholder="00000-000" {...field}/>
+              )}
+            </InputMask>
           </FormControl>
           <FormMessage/>
         </FormItem>
@@ -223,6 +262,7 @@ export default function MultiStepForm() {
                                 <SelectItem value="Funcionário(a) Público(a)">Funcionário(a) Público(a)</SelectItem>
                                 <SelectItem value="Aposentado(a)">Aposentado(a)</SelectItem>
                                 <SelectItem value="Profissional Liberal">Profissional Liberal</SelectItem>
+                                <SelectItem value="Desempregado">Desempregado</SelectItem>
                               </SelectContent>
                             </Select>
                           </FormControl>
@@ -249,6 +289,7 @@ export default function MultiStepForm() {
                                 <SelectItem value="Adquirir bens">Adquirir bens</SelectItem>
                                 <SelectItem value="Refinanciar dívidas">Refinanciar dívidas</SelectItem>
                                 <SelectItem value="Só estou simulando">Só estou Simulando</SelectItem>
+                                <SelectItem value="Outro">Outro</SelectItem>
                               </SelectContent>
                             </Select>
                           </FormControl>
@@ -285,11 +326,15 @@ export default function MultiStepForm() {
                     <span></span>
                   </div>
                 }
+                <div className={`bg-yellow-200 p-2 rounded-lg border border-yellow-300 ${step === 2 ? "block" : "hidden"}`}>
+                  <span className="text-sm text-yellow-600">Atenção: Caso não conclua o registro após apertar Concluir, volte as etapas e verifique se está tudo certo!</span>
+                </div>
                 <Button
-                  className={`bg-green-500 hover:bg-green-600 w-full mt-4 ${step === 2 ? "block" : "hidden"}`}
+                  className={`bg-green-500 hover:bg-green-600 w-full mt-4 ${step === 2 ? "block" : "hidden"} ${loading ? 'bg-green-700' : ''}`}
                   type="submit"
+                  disabled={loading}
                 >
-                  Concluir
+                  {loading ? 'Aguarde...' : 'Concluir'}
                 </Button>
               </form>
             </Form>
