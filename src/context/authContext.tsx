@@ -67,12 +67,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     }
   }, []);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     setUser(null);
     setToken(null);
     localStorage.removeItem("@zenithcredit:token");
     localStorage.removeItem("@zenithcredit:user");
-  };
+  },[]);
 
   return (
     <AuthContext.Provider value={{ user, token, login, logout }}>

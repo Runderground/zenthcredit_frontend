@@ -27,7 +27,7 @@ import {
   ChevronDown,
   UserX,
   UserRoundPlus,
-  UserPen,
+  // UserPen,
   UserRoundSearch,
   PhoneCall,
   FileUser,
@@ -35,11 +35,19 @@ import {
   CarFront,
   House,
   Landmark,
+  LogOut
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
+
+import { useAuth } from '../context/authContext'
 
 export default function SideBar() {
+
+  const {user, token, logout} = useAuth()
+  
   const navegationItems = [
     {
       title: "Início",
@@ -150,70 +158,79 @@ export default function SideBar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-        <SidebarGroup>
-          <SidebarGroupLabel className="flex gap-2">
-            Administração <Badge className="bg-blue-400">Privado</Badge>
-          </SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {adminItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <Link to={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-              <Collapsible defaultOpen className="group/collapsible">
-                <SidebarMenuItem>
-                  <CollapsibleTrigger asChild>
-                    <SidebarMenuButton asChild>
-                      <span className="cursor-pointer select-none w-full">
-                        <UsersRound />
-                        <span>Administradores</span>
-                        <ChevronDown />
-                      </span>
-                    </SidebarMenuButton>
-                  </CollapsibleTrigger>
-                  <CollapsibleContent>
-                    <SidebarMenuSub>
-                      <SidebarMenuSubButton asChild>
-                        <Link to="/admin/administradores">
-                          <UserRoundSearch />
-                          <span>Ver Administradores</span>
-                        </Link>
-                      </SidebarMenuSubButton>
-                      <SidebarMenuSubButton asChild>
-                        <Link to="">
-                          <UserRoundPlus />
-                          <span>Adicionar Administrador</span>
-                        </Link>
-                      </SidebarMenuSubButton>
-                      <SidebarMenuSubButton asChild>
-                        <Link to="">
-                          <UserX />
-                          <span>Deletar Administrador</span>
-                        </Link>
-                      </SidebarMenuSubButton>
-                      {/* <SidebarMenuSubButton asChild>
-                        <Link to="">
-                          <UserPen />
-                          <span>Editar Administrador</span>
-                        </Link>
-                      </SidebarMenuSubButton> */}
-                    </SidebarMenuSub>
-                  </CollapsibleContent>
-                </SidebarMenuItem>
-              </Collapsible>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        {token ? (<SidebarGroup>
+                   <SidebarGroupLabel className="flex gap-2">
+                     Administração <Badge className="bg-blue-400">Privado</Badge>
+                   </SidebarGroupLabel>
+                   <SidebarGroupContent>
+                     <SidebarMenu>
+                       {adminItems.map((item) => (
+                         <SidebarMenuItem key={item.title}>
+                           <SidebarMenuButton asChild>
+                             <Link to={item.url}>
+                               <item.icon />
+                               <span>{item.title}</span>
+                             </Link>
+                           </SidebarMenuButton>
+                         </SidebarMenuItem>
+                       ))}
+                       <Collapsible defaultOpen className="group/collapsible">
+                         <SidebarMenuItem>
+                           <CollapsibleTrigger asChild>
+                             <SidebarMenuButton asChild>
+                               <span className="cursor-pointer select-none w-full">
+                                 <UsersRound />
+                                 <span>Administradores</span>
+                                 <ChevronDown />
+                               </span>
+                             </SidebarMenuButton>
+                           </CollapsibleTrigger>
+                           <CollapsibleContent>
+                             <SidebarMenuSub>
+                               <SidebarMenuSubButton asChild>
+                                 <Link to="/admin/administradores">
+                                   <UserRoundSearch />
+                                   <span>Ver Administradores</span>
+                                 </Link>
+                               </SidebarMenuSubButton>
+                               <SidebarMenuSubButton asChild>
+                                 <Link to="">
+                                   <UserRoundPlus />
+                                   <span>Adicionar Administrador</span>
+                                 </Link>
+                               </SidebarMenuSubButton>
+                               <SidebarMenuSubButton asChild>
+                                 <Link to="">
+                                   <UserX />
+                                   <span>Deletar Administrador</span>
+                                 </Link>
+                               </SidebarMenuSubButton>
+                               {/* <SidebarMenuSubButton asChild>
+                                 <Link to="">
+                                   <UserPen />
+                                   <span>Editar Administrador</span>
+                                 </Link>
+                               </SidebarMenuSubButton> */}
+                             </SidebarMenuSub>
+                           </CollapsibleContent>
+                         </SidebarMenuItem>
+                       </Collapsible>
+                     </SidebarMenu>
+                   </SidebarGroupContent>
+                 </SidebarGroup>) : ''}
       </SidebarContent>
-      <SidebarFooter>
-        Testando
-      </SidebarFooter>
+      {token ? (<SidebarFooter className="flex flex-col">
+                 <div className="flex flex-row gap-2">
+                   <Avatar>
+                      <AvatarFallback className="bg-blue-400 text-white font-bold">{user.nome.charAt(0)}</AvatarFallback>
+                    </Avatar>
+                      <div className="flex flex-col">
+                        <span className="text-sm text-slate-600 font-semibold">{user.nome}</span>
+                        <span className="text-xs text-slate-300">{user.email}</span>
+                      </div>
+                 </div>
+        <Button onClick={logout} className="bg-red-400 hover:bg-red-500"><LogOut/></Button>
+               </SidebarFooter>) : ''}
     </Sidebar>
   );
 }
