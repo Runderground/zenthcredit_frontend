@@ -32,10 +32,68 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from '@/components/ui/dialog'
+
 import { Badge } from '@/components/ui/badge'
 
+import {
+  useState,
+  useEffect
+} from 'react'
+
+import axios from 'axios'
+
+interface IContact {
+  _id: string,
+  nome: string,
+  email: string,
+  telefone: string,
+  status: string,
+  comentario: string
+}
 
 export default function ContactView() {
+  const [contacts, setContacts] = useState<IContact[]>([])
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/contatos/`)
+        console.log(data)
+        setContacts(data)
+      } catch(error) {
+        console.log(error)
+      }
+    }
+    fetchData()
+  },[])
+
+  const changeStatus = async(id: string) => {
+    try {
+      const { data } = await axios.patch(`${import.meta.env.VITE_API_URL}/contatos/changestatus/${id}`)
+      setContacts((prevContacts) => prevContacts.map((contato) => contato._id === id ? {...contato, status: data.status} : contato))
+      console.log(data)
+    } catch(error) {
+      console.error(error)
+    }
+  }
+
+  const deleteUser = async (id: string) => {
+      try {
+        const { data } = await axios.delete(`${import.meta.env.VITE_API_URL}/contatos/delete/${id}`)
+        console.log(data)
+      } catch (error) {
+        console.log(error)
+      }
+  }
+  
   return (
     <div className="m-6 mt-12">
       <h1 className="text-3xl font-semibold mb-4">Olá Rafael 👋,</h1>
@@ -66,66 +124,49 @@ export default function ContactView() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow>
-                <TableCell><DropdownMenu>
-                  <DropdownMenuTrigger>
-                    <Bolt/>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DropdownMenuLabel>
-                      Opções
-                    </DropdownMenuLabel>
-                    <DropdownMenuItem>
-                      Alterar situação
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      Chamar no WhatsApp
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      Editar contato
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      Excluir contato
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu></TableCell>
-                <TableCell><Badge className="bg-yellow-400">Pendente</Badge></TableCell>
-                <TableCell>Rafael Bueno</TableCell>
-                <TableCell>rafaelbuenorb02@gmail.com</TableCell>
-                <TableCell>(11) 99418-7606</TableCell>
-                <TableCell>Gostaria de saber mais sobre o Financiamento de Carro.</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger>
-                      <Bolt/>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      <DropdownMenuLabel>
-                        Opções
-                      </DropdownMenuLabel>
-                      <DropdownMenuItem>
-                        Alterar situação
-                      </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        Chamar no WhatsApp
-                      </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        Editar contato
-                      </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        Excluir contato
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>  
-                </TableCell>
-                <TableCell><Badge className="bg-green-400">Atendido</Badge></TableCell>
-                <TableCell>Maria Clara</TableCell>
-                <TableCell>mariaclara@gmail.com</TableCell>
-                <TableCell>(23) 42143-7606</TableCell>
-                <TableCell>Como faço para simular no site? Tenho dúvidas...</TableCell>
-              </TableRow>
+              {contacts ? (contacts.map((contact) => (
+      <TableRow>
+        <TableCell><DropdownMenu>
+          <DropdownMenuTrigger>
+            <Bolt/>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel>
+              Opções
+            </DropdownMenuLabel>
+            <DropdownMenuItem onClick={() => changeStatus(contact._id)}>
+              Alterar situação
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              Chamar no WhatsApp
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              Editar contato
+            </DropdownMenuItem> 
+              <Dialog>
+                <DialogTrigger className="p-1 text-sm hover:bg-slate-100 w-full text-start rounded">
+                  <span className="ml-1">Deletar contato</span>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Tem certeza que deseja <strong className="text-red-500">Deletar?</strong></DialogTitle>
+                    <DialogDescription>
+                      Você tem certeza que gostaria de deletar <strong>{contact.nome}</strong> dos pedidos de contatos?
+                    </DialogDescription>
+                  </DialogHeader>
+                    <Button className="bg-red-400 hover:bg-red-500"
+                      onClick={() => deleteUser(contact._id)}>Deletar</Button>
+                </DialogContent>
+              </Dialog>
+          </DropdownMenuContent>
+        </DropdownMenu></TableCell>
+        <TableCell><Badge className={`${contact.status === "Pendente" ? 'bg-yellow-400 hover:bg-yellow-500' : 'bg-green-400 hover:bg-green-500'}`}>{contact.status}</Badge></TableCell>
+        <TableCell>{contact.nome}</TableCell>
+        <TableCell>{contact.email}</TableCell>
+        <TableCell>{contact.telefone}</TableCell>
+        <TableCell className={`${contact.comentario === "Não há comentário." ? 'text-slate-300' : ''}`}>{contact.comentario}</TableCell>
+      </TableRow>
+              ))) : (<h1>Test3</h1>)}
             </TableBody>
           </Table>
         </CardContent>
