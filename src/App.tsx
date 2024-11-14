@@ -26,7 +26,7 @@ function App() {
         <SidebarProvider>
           <SideBar />
           <main className="w-full h-full">
-            <header className="flex fixed bg-white w-full shadow-sm h-8">
+            <header className="flex fixed bg-white w-full shadow-sm h-8 z-20">
               <SidebarTrigger size={"sm"} />
               <h2 className="text-2xl font-bold uppercase text-slate-500 text-center ml-4">
                 Zenith Credit
@@ -49,6 +49,10 @@ function App() {
               />
               <Route
                 path="/emprestimos/garantia-imovel"
+                element={<VehicleGuaranteeLoan />}
+              />
+              <Route
+                path="/emprestimos/pessoal"
                 element={<VehicleGuaranteeLoan />}
               />
               <Route
