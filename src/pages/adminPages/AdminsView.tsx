@@ -128,7 +128,7 @@ export default function AdminsView() {
           },
         },
       );
-      const newAdmins = registers.filter(contact => contact._id !== id)
+      const newAdmins = registers.filter(admin => admin._id !== id)
       setRegisters(newAdmins)
       toast.success(data.success)
     } catch (error) {
@@ -213,7 +213,7 @@ export default function AdminsView() {
                                   Deletar
                                 </Button>
                               </DialogContent>
-                            </Dialog>
+                            </Dialog>   
                           </DropdownMenuContent>
                         </DropdownMenu>
                       </TableCell>

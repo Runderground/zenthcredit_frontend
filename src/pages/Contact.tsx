@@ -15,7 +15,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from '@/components/ui/textarea'
 import axios from 'axios'
-import { useAuth } from '@/context/authContext'
 import toast from 'react-hot-toast'
 
 const formSchema = z.object({
@@ -26,8 +25,6 @@ const formSchema = z.object({
 })
 
 export default function Contact() {
-
-  const { token } = useAuth()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

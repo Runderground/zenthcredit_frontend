@@ -66,7 +66,12 @@ export default {
   				border: 'hsl(var(--sidebar-border))',
   				ring: 'hsl(var(--sidebar-ring))'
   			}
-  		}
+  		},
+      backgroundImage: {
+        'vehicle-guarantee-loan': "url('https://i.imgur.com/IA33bEw.png')",
+        'property-guarantee-loan': "url('https://i.imgur.com/dPkvX5A.png')",
+        'loan-background': "url('https://i.imgur.com/tbyxWST.png')",
+      }
   	}
   },
   plugins: [require("tailwindcss-animate")],
