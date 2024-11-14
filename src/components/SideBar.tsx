@@ -41,6 +41,14 @@ import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from '@/components/ui/dialog'
 
 import { useAuth } from '../context/authContext'
 
@@ -188,7 +196,7 @@ export default function SideBar() {
                            <CollapsibleContent>
                              <SidebarMenuSub>
                                <SidebarMenuSubButton asChild>
-                                 <Link to="/admin/administradores">
+                                 <Link to="/admin/admins">
                                    <UserRoundSearch />
                                    <span>Ver Administradores</span>
                                  </Link>
@@ -199,18 +207,6 @@ export default function SideBar() {
                                    <span>Adicionar Administrador</span>
                                  </Link>
                                </SidebarMenuSubButton>
-                               <SidebarMenuSubButton asChild>
-                                 <Link to="">
-                                   <UserX />
-                                   <span>Deletar Administrador</span>
-                                 </Link>
-                               </SidebarMenuSubButton>
-                               {/* <SidebarMenuSubButton asChild>
-                                 <Link to="">
-                                   <UserPen />
-                                   <span>Editar Administrador</span>
-                                 </Link>
-                               </SidebarMenuSubButton> */}
                              </SidebarMenuSub>
                            </CollapsibleContent>
                          </SidebarMenuItem>
