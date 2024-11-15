@@ -50,11 +50,12 @@ export default function SimuladorDeEmprestimo() {
     if(valorTotal === 0 || Number(taxaJuros) === 0 || parcelas === 0) {
       return 0
     }
-    const taxaMensal = Number(taxaJuros) / 100 / 12;
+    const j = Number(taxaJuros) / 100
+    console.log(j)
+    const valorFinanciado =  (valorTotal * j * Math.pow(1 + j, parcelas)) / (Math.pow(1 + j, parcelas) - 1)
+    console.log(valorFinanciado)
 
-    const parcela = valorTotal * (taxaMensal * Math.pow(1 + taxaMensal, parcelas)) / (Math.pow(1 + taxaMensal, parcelas) - 1);
-
-    return Number(parcela.toFixed(2))
+    return Number(valorFinanciado)
   }
 
   let parcelas = calcularParcela(valor, juros, meses)
