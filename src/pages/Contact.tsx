@@ -47,7 +47,7 @@ export default function Contact() {
   }
   
   return (
-    <section className="flex flex-col lg:flex-row m-4 lg:m-12 items-center justify-center lg:justify-between">
+    <section className="flex flex-col lg:flex-row m-4 mt-20 items-center justify-center lg:justify-between">
       <img className="w-64 h-64 lg:w-1/2 lg:h-1/2 lg:mr-4" src={ContactSVG} alt="Contact SVG"/>
       <div className="border-slate-300 border-2 rounded p-8">
         <h2 className="font-semibold text-3xl text-slate-700">Fale Conosco</h2>

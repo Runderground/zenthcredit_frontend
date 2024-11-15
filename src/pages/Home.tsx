@@ -23,27 +23,33 @@ export default function Home() {
   const parceiros = [
     {
       url: Itau,
-      alt: "Itau"
+      alt: "Itau",
+      bgColor: "bg-orange-400"
     },
     {
       url: BB,
-      alt: "BB"
+      alt: "BB",
+      bgColor: "bg-yellow-400"
     },
     {
       url: Santander,
-      alt: "Santander"
+      alt: "Santander",
+      bgColor: "bg-red-500"
     },
     {
       url: Creditas,
-      alt: "Creditas"
+      alt: "Creditas",
+      bgColor: "bg-green-200"
     },
     {
       url: CashMe,
-      alt: "CashMe"
+      alt: "CashMe",
+      bgColor: "bg-blue-200"
     },
     {
       url: Bradesco,
-      alt: "Bradesco"
+      alt: "Bradesco",
+      bgColor: "bg-red-100"
     },
   ]
   const HowWeWorks = [
@@ -73,7 +79,7 @@ export default function Home() {
       <>
         {/* Sessão 1 */}
       <section>
-        <div className="m-8 p-2 mt-12 flex flex-col lg:flex-row items-center lg:items-start justify-center lg:justify-start text-center lg:text-start">
+        <div className="m-8 p-2 mt-20 flex flex-col lg:flex-row items-center lg:items-center justify-center lg:justify-start text-center lg:text-start">
           <div>
             <h1 className="text-5xl lg:text-6xl font-bold text-slate-800 mb-2 font-normal">Simule seu empréstimo com a <strong className="text-blue-500 font-semibold">Zenith Credit</strong></h1>
             <p className="text-3xl mb-4 text-slate-600">Com o nosso sistema, você <strong className="font-semibold text-blue-500">poderá realizar simulações de empréstimo direto no site!</strong> Após isso poderá falar com algum de nossos consultores. Aqui você pode simular seu empréstimo sem a necessidade de se cadastrar antes!</p>
@@ -117,7 +123,7 @@ export default function Home() {
           <div className="flex flex-col w-full items-center">
             <div className="grid grid-cols-3 gap-6 mb-4">
               {parceiros.map(p => (
-                <img className="h-24 p-4 bg-blue-200 rounded-lg" src={p.url} alt={p.alt} />
+                <img className={`h-24 p-4 bg-blue-200 rounded-lg ${p.bgColor}`} src={p.url} alt={p.alt} />
               ))}
             </div>
           </div>

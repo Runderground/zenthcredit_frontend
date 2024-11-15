@@ -135,7 +135,7 @@ export default function ContactView() {
   };
 
   return (
-    <div className="m-6 mt-12">
+    <div className="m-6 mt-20">
       <h1 className="text-3xl font-semibold mb-4">Olá {user.nome.split(" "[0])} 👋,</h1>
       <section>
         <Card>

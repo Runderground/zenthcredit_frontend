@@ -13,7 +13,7 @@ export default function PropertyGuaranteeLoan() {
       <section className="bg-cover bg-center h-96" style={{backgroundImage: "url('https://i.imgur.com/WfmFCmp.png')"}}>
 
         <div className="relative z-10 flex items-center ml-2 justify-start h-full text-white">
-          <div className="flex flex-col m-12">
+          <div className="flex flex-col mt-20">
             <h1 className="text-3xl font-semibold text-shadow">Empréstimo com Garantia de Imóvel</h1>
             <p>Condições sob medida, com parcelas acessíveis e taxas que facilitam.</p>
             <div className="mt-2">

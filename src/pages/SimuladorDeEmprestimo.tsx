@@ -68,7 +68,7 @@ export default function SimuladorDeEmprestimo() {
   let totalComJuros = calcularTotalComJuros(parcelas, meses)
   
   return (
-    <section className="m-4 mt-12 flex flex-col items-center">
+    <section className="m-4 mt-20 flex flex-col items-center">
 
       {/* Titulo */}
       <div className="mb-4">
@@ -89,7 +89,7 @@ export default function SimuladorDeEmprestimo() {
             <div className="flex flex-col gap-4">
               <span className="text-md text-slate-500 font-semibold">Valor do empréstimo:</span>
               <Slider onValueChange={handleSliderChange} max={100000} step={valor < 15000 ?1000 : 5000}/>
-            <div className="flex justify-between w-full text-sm text-slate-300">
+            <div className="flex justify-between w-full text-sm text-slate-500">
             <span>R$ 1000</span>
             <span>R$ 100.000</span>
             </div>
@@ -100,7 +100,7 @@ export default function SimuladorDeEmprestimo() {
             <div className="flex flex-col gap-4">
               <span className="text-md text-slate-500 font-semibold">Tempo de Pagamento:</span>
               <Slider onValueChange={handleMesesChange} max={120} step={meses < 12 ? 6 : 12}/>
-            <div className="flex justify-between w-full text-sm text-slate-300">
+            <div className="flex justify-between w-full text-sm text-slate-500">
             <span>6 meses</span>
             <span>120 meses</span>
             </div>
@@ -121,7 +121,7 @@ export default function SimuladorDeEmprestimo() {
                   <SelectItem value="7.95">7,95% ( média Emprestimo Pessoal )</SelectItem>
                 </SelectContent>
               </Select>
-            <div className="flex justify-between w-full text-sm text-slate-300">
+            <div className="flex justify-between w-full text-sm text-slate-500">
             <span>Não é valor definitivo, pode surgir qualquer alteração ao fazer uma consulta.</span>
             </div>
             </div>
@@ -136,7 +136,7 @@ export default function SimuladorDeEmprestimo() {
           <CardContent className="flex flex-col gap-4 items-center justify-center">
             <h1 className="text-2xl font-semibold text-slate-600 text-center">Parcelas Mensais</h1>
             <h2 className="text-4xl font-bold text-blue-500"> {parcelas.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</h2>
-            <span className="text-slate-300 font-semibold text-sm">taxas de juros incluídos</span>
+            <span className="text-slate-500 font-semibold text-sm">taxas de juros incluídos</span>
             <div className="grid mt-4 grid-cols-1 gap-4">
               
             <div className="flex flex-col gap-2 items-center bg-slate-200 p-4 rounded-lg">
