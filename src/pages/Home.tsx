@@ -119,6 +119,22 @@ export default function Home() {
           
         </div>
       </section>
+        <section className="flex flex-col items-center mt-2 bg-blue-100/50">
+        <h1 className="text-2xl font-semibold text-slate-600">Nossos parceiros</h1>
+          <div className="flex flex-col m-4 w-full items-center">
+            <div className="flex w-full justify-around gap-4">
+              <img className="h-24" src="https://i.imgur.com/gzo1DHn.png" alt="ITAU" />
+              <img className="h-24" src="https://i.imgur.com/a1rxPSx.png" alt="CashME" />
+              <img className="h-24" src="https://i.imgur.com/OUnzzml.png" alt="Bradesco" />
+            </div>
+            <br/>
+            <div className="flex w-full justify-around gap-4">
+              <img className="h-24" src="https://i.imgur.com/9FCiIy8.png" alt="Creditas" />
+              <img className="h-24" src="https://i.imgur.com/FQL4co8.png" alt="BB" />
+              <img className="h-24" src="https://i.imgur.com/axRQRtW.png" alt="Santander" />
+            </div>
+          </div>
+        </section>
     </>
   )
 }
