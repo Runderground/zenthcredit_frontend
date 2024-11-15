@@ -13,7 +13,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "@/context/authContext";
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-import { useNavigate } from 'react-router-dom'
 
 type Register = {
   _id: string;
@@ -40,7 +39,6 @@ interface IContact {
 
 export default function Dashboard() {
   const { token } = useAuth();
-  const navigate = useNavigate()
   const [cadastroTotal, setCadastroTotal] = useState<number>(0);
   const [adminTotal, setAdminTotal] = useState<number>(0);
   const [contatoTotal, setContatoTotal] = useState<number>(0);

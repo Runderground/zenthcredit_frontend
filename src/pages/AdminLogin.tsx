@@ -81,7 +81,7 @@ export default function AdminLogin() {
                 </FormItem>
               )}
               />
-            <Button className="mt-4" type="submit">Entrar</Button>
+            <Button className="mt-4" type="submit" disabled={loading}>{loading ? 'Aguarde...' : 'Entrar'}</Button>
           </form>
         </Form>
       </div>
