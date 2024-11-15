@@ -314,7 +314,7 @@ export default function MultiStepForm() {
                               </SelectTrigger>
                               <SelectContent>
                                 <SelectItem value="Não">Não</SelectItem>
-                                <SelectItem value="Ímovel">Ímovel</SelectItem>
+                                <SelectItem value="Imóvel">Imóvel</SelectItem>
                                 <SelectItem value="Veículo">Veículo</SelectItem>
                               </SelectContent>
                             </Select>

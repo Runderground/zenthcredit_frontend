@@ -40,7 +40,7 @@ export default function Home() {
       <section className="m-8 mt-12 flex flex-col lg:flex-row items-center lg:items-start justify-center lg:justify-start text-center lg:text-start">
         <div>
           <h1 className="text-5xl lg:text-6xl font-bold text-slate-800 mb-2 font-normal">Simule seu empréstimo com a <strong className="underline decoration-blue-500">Zenith Credit</strong></h1>
-          <p className="text-lg mb-4 text-slate-600">Com o nosso sistema, você <strong className="font-semibold bg-blue-500/30 p-0.5 rounded-md">poderá realizar simulações de empréstimo direto no site!</strong> Após isso poderá falar com algum de nossos consultores.</p>
+          <p className="text-lg mb-4 text-slate-600">Com o nosso sistema, você <strong className="font-semibold bg-blue-500/30 p-0.5 rounded-md">poderá realizar simulações de empréstimo direto no site!</strong> Após isso poderá falar com algum de nossos consultores. Aqui você pode simular seu empréstimo sem a necessidade de se cadastrar antes!</p>
             <Button onClick={() => navigate("../simular-emprestimo", {replace: true})} className="mr-2">Iniciar simulação</Button>
             <Button onClick={() => navigate("../registro", {replace: true})} variant="secondary">Fazer registro</Button>
         </div>
@@ -54,19 +54,22 @@ export default function Home() {
         <ServiceCard.Root>
           <ServiceCard.Icon icon={<CircleDollarSign size={65}/>}/>
           <ServiceCard.Title title="Simulação de empréstimo" />
-          <ServiceCard.Description description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."/>
+          <ServiceCard.Description description="Desenvolvido com as taxas atuais, nossa simulação lhe retorna todas as informações que você precisa antes de realizar um empréstimo, um ótimo meio para você se planejar antes de falar com algum dos nossos consultores."/>
+          <Button onClick={() => navigate("/simular-emprestimo")} className="mt-2">Simular agora</Button>
         </ServiceCard.Root>
 
         <ServiceCard.Root>
           <ServiceCard.Icon icon={<Factory size={65}/>}/>
-          <ServiceCard.Title title="Financiamento para empresas" />
-          <ServiceCard.Description description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
+          <ServiceCard.Title title="Empréstimo com Garantia com Imóvel" />
+          <ServiceCard.Description description="Oferecemos serviços de empréstimo com garantia com imóvel, caso você não saiba como funciona, clique no botão abaixo 'Saber mais' e retire toda as suas dúvidas!" />
+          <Button onClick={() => navigate("/emprestimos/garantia-imovel")} variant="secondary" className="mt-2">Saber mais</Button>
         </ServiceCard.Root>
 
         <ServiceCard.Root>
           <ServiceCard.Icon icon={<Car size={65}/>}/>
-          <ServiceCard.Title title="Financiamento de Automoveis" />
-          <ServiceCard.Description description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."/>
+          <ServiceCard.Title title="Empréstimo com Garantia com Veículo" />
+          <ServiceCard.Description description="Oferecemos serviços de empréstimo com garantia com veículo, caso você não saiba como funciona, clique no botão abaixo 'Saber mais' e retire toda as suas dúvidas!"/>
+          <Button onClick={() => navigate("/emprestimos/garantia-veiculo")} variant="secondary" className="mt-2">Saber mais</Button>
         </ServiceCard.Root>
       </ul>
     </section>
