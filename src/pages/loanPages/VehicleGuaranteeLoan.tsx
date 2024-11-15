@@ -4,6 +4,10 @@ import CarSVG from '../../assets/Loans/Car.svg'
 import { Link } from 'react-router-dom' 
 
 export default function VehicleGuaranteeLoan() {
+
+  const handleWhatsApp = () => {
+    window.open('https://wa.me/5511991184877?text=Olá, vim pelo site da Zenith Credit e estou interessado sobre o empréstimo com garantia de veículo.', '_blank')
+  }
   return (
     <>
       <section className="bg-cover bg-center h-96" style={{backgroundImage: "url('https://i.imgur.com/584j2op.png')"}}>
@@ -13,7 +17,7 @@ export default function VehicleGuaranteeLoan() {
             <h1 className="text-3xl font-semibold text-shadow">Empréstimo com garantia de Veículo</h1>
             <p>Condições sob medida, com parcelas acessíveis e taxas que facilitam.</p>
             <div className="mt-2">
-              <Button className="bg-green-500 hover:bg-green-600"><BsWhatsapp/>Chamar no WhatsApp</Button>
+              <Button onClick={handleWhatsApp} className="bg-green-500 hover:bg-green-600"><BsWhatsapp/>Chamar no WhatsApp</Button>
             </div>
           </div>
         </div>
@@ -25,7 +29,7 @@ export default function VehicleGuaranteeLoan() {
           <p className="text-2xl text-slate-500 text-justify">O empréstimo com garantia de veículo é um tipo de empréstimo em que o seu veículo é colocado como garantia para a instituição financeira.</p>
           <p className="text-2xl text-slate-500 text-justify">Você tem Taxas de juros menores comparado ao <Link className="text-blue-500 underline"to="/emprestimos/pessoal">Empréstimo Pessoal</Link>, prazos mais longos, e muito mais!</p>
           <div>
-            <Button className="bg-green-500 hover:bg-green-600"><BsWhatsapp/>Chamar no WhatsApp</Button>
+            <Button onClick={handleWhatsApp} className="bg-green-500 hover:bg-green-600"><BsWhatsapp/>Chamar no WhatsApp</Button>
           </div>
         </div>
       </section>
@@ -41,7 +45,7 @@ export default function VehicleGuaranteeLoan() {
             <p className="text-2xl text-slate-500 text-justify">Fazer um empréstimo com garantia de veículo é fácil 100% online. Com valores maiores, prazos mais longos e taxas reduzidas, o processo é simples: faça seu cadastro, aguarde um dos nossos consultores entrar em contato.</p>
           </div>
         </div>
-        <Button className="bg-green-500 hover:bg-green-600 w-full"><BsWhatsapp/>Chamar no WhatsApp</Button>
+        <Button onClick={handleWhatsApp} className="bg-green-500 hover:bg-green-600 w-full"><BsWhatsapp/>Chamar no WhatsApp</Button>
       </section>
     </>
   )

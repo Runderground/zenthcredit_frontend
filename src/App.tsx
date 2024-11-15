@@ -17,6 +17,8 @@ import { Toaster } from "react-hot-toast";
 import AdminLogin from "./pages/AdminLogin";
 import { useAuth } from './context/authContext'
 import AdminsView from "./pages/adminPages/AdminsView";
+import PropertyGuaranteeLoan from "./pages/loanPages/PropertyGuaranteeLoan";
+import PersonalLoan from "./pages/loanPages/PersonalLoan";
 
 function App() {
   
@@ -49,11 +51,11 @@ function App() {
               />
               <Route
                 path="/emprestimos/garantia-imovel"
-                element={<VehicleGuaranteeLoan />}
+                element={<PropertyGuaranteeLoan />}
               />
               <Route
                 path="/emprestimos/pessoal"
-                element={<VehicleGuaranteeLoan />}
+                element={<PersonalLoan />}
               />
               <Route
                 path="/acessar/admin"
