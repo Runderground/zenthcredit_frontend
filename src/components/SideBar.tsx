@@ -167,16 +167,16 @@ export default function SideBar() {
     <Sidebar>
       <SidebarHeader className="flex flex-row text-lg items-center font-semibold">
         <img src="https://i.imgur.com/j4QZ5vg.png" alt="Logo" className="h-20 w-20"/>
-        <h2 className="uppercase">Zenith Credit</h2>
+        <h2 className="uppercase text-white">Zenith <strong className="text-blue-500">CREDIT</strong></h2>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Navegar</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-green-500">Navegar</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {navegationItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton className="text-white hover:bg-slate-700 hover:text-green-500" asChild>
                     <Link to={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
@@ -185,7 +185,7 @@ export default function SideBar() {
                 </SidebarMenuItem>
               ))}
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton className="text-white hover:bg-slate-700 hover:text-green-500" asChild>
                   <a href="/#services">
                     <BriefcaseBusiness />
                     <span>Serviços</span>
@@ -193,10 +193,10 @@ export default function SideBar() {
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <Collapsible defaultOpen className="group/collapsible">
-                <SidebarMenuItem>
+                <SidebarMenuItem >
                   <CollapsibleTrigger asChild>
-                    <SidebarMenuButton asChild>
-                      <span className="cursor-pointer select-none w-full">
+                    <SidebarMenuButton className="text-white hover:bg-slate-700 hover:text-green-500" asChild>
+                      <span className="cursor-pointer select-none w-full text-white hover:bg-slate-700 hover:text-green-500">
                         <Landmark />
                         <span>Empréstimos</span>
                         <ChevronDown />
@@ -206,9 +206,9 @@ export default function SideBar() {
                   <CollapsibleContent>
                     <SidebarMenuSub>
                       {loanItems.map((item) => (
-                        <SidebarMenuSubButton key={item.title} asChild>
+                        <SidebarMenuSubButton className="text-white hover:bg-slate-700 hover:text-green-500" key={item.title} asChild>
                           <Link to={item.url}>
-                            <item.icon />
+                            <item.icon className="dark"/>
                             <span>{item.title}</span>
                           </Link>
                         </SidebarMenuSubButton>
@@ -221,14 +221,14 @@ export default function SideBar() {
           </SidebarGroupContent>
         </SidebarGroup>
         {token ? (<SidebarGroup>
-                   <SidebarGroupLabel className="flex gap-2">
-                     Administração <Badge className="bg-blue-400">Privado</Badge>
+                   <SidebarGroupLabel className="flex gap-2 text-green-500">
+                     Administração <Badge className="bg-blue-400 hover:bg-blue-500">Privado</Badge>
                    </SidebarGroupLabel>
                    <SidebarGroupContent>
                      <SidebarMenu>
                        {adminItems.map((item) => (
                          <SidebarMenuItem key={item.title}>
-                           <SidebarMenuButton asChild>
+                           <SidebarMenuButton className="text-white hover:bg-slate-700 hover:text-green-500" asChild>
                              <Link to={item.url}>
                                <item.icon />
                                <span>{item.title}</span>
@@ -239,7 +239,7 @@ export default function SideBar() {
                        <Collapsible defaultOpen className="group/collapsible">
                          <SidebarMenuItem>
                            <CollapsibleTrigger asChild>
-                             <SidebarMenuButton asChild>
+                             <SidebarMenuButton className="text-white hover:bg-slate-700 hover:text-green-500" asChild>
                                <span className="cursor-pointer select-none w-full">
                                  <UsersRound />
                                  <span>Administradores</span>
@@ -249,15 +249,15 @@ export default function SideBar() {
                            </CollapsibleTrigger>
                            <CollapsibleContent>
                              <SidebarMenuSub>
-                               <SidebarMenuSubButton asChild>
+                               <SidebarMenuSubButton className="text-white hover:bg-slate-700 hover:text-green-500" asChild>
                                  <Link to="/admin/admins">
-                                   <UserRoundSearch />
+                                   <UserRoundSearch className="dark"/>
                                    <span>Ver Administradores</span>
                                  </Link>
                                </SidebarMenuSubButton>
                                <SidebarMenuSubButton asChild>
                                  <Dialog open={open} onOpenChange={() => setOpen(!open)}>
-                                   <DialogTrigger className="flex gap-1 items-center p-1 text-sm hover:bg-slate-100 w-full text-start rounded">
+                                   <DialogTrigger className="flex gap-1 items-center p-1 text-sm hover:bg-slate-700 w-full text-start rounded text-white hover:text-green-500">
                                      <UserRoundPlus size={17}/>
                                      <span className="ml-1">Adicionar Administrador</span>
                                    </DialogTrigger>
@@ -332,7 +332,7 @@ export default function SideBar() {
                       <AvatarFallback className="bg-blue-400 text-white font-bold">{user.nome.charAt(0)}</AvatarFallback>
                     </Avatar>
                       <div className="flex flex-col">
-                        <span className="text-sm text-slate-600 font-semibold">{user.nome}</span>
+                        <span className="text-sm text-blue-500 font-semibold">{user.nome}</span>
                         <span className="text-xs text-slate-300">{user.email}</span>
                       </div>
                  </div>

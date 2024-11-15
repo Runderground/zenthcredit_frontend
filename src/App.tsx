@@ -28,8 +28,8 @@ function App() {
         <SidebarProvider>
           <SideBar />
           <main className="w-full h-full">
-            <header className="flex fixed bg-white w-full shadow-sm h-8 z-20">
-              <SidebarTrigger size={"lg"} />
+            <header className="flex fixed bg-slate-800 w-full shadow-sm h-8 z-20">
+              <SidebarTrigger className="text-blue-500 hover:bg-transparent" size={"lg"} />
               <h2 className="self-center font-bold text-blue-500 uppercase text-2xl">Zenith Credit</h2>
               <div></div>
             </header>

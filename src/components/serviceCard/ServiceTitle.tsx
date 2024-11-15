@@ -4,6 +4,6 @@ interface ITitle {
 
 export default function ServiceTitle({ title }: ITitle) {
   return (
-    <h2 className="font-bold text-2xl text-slate-600">{title}</h2>
+    <h2 className="font-bold text-2xl text-green-400">{title}</h2>
   )
 }

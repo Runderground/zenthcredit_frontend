@@ -37,19 +37,21 @@ export default function Home() {
   return (
       <>
         {/* Sessão 1 */}
-      <section className="m-8 mt-12 flex flex-col lg:flex-row items-center lg:items-start justify-center lg:justify-start text-center lg:text-start">
-        <div>
-          <h1 className="text-5xl lg:text-6xl font-bold text-slate-800 mb-2 font-normal">Simule seu empréstimo com a <strong className="underline decoration-blue-500">Zenith Credit</strong></h1>
-          <p className="text-lg mb-4 text-slate-600">Com o nosso sistema, você <strong className="font-semibold bg-blue-500/30 p-0.5 rounded-md">poderá realizar simulações de empréstimo direto no site!</strong> Após isso poderá falar com algum de nossos consultores. Aqui você pode simular seu empréstimo sem a necessidade de se cadastrar antes!</p>
-            <Button onClick={() => navigate("../simular-emprestimo", {replace: true})} className="mr-2">Iniciar simulação</Button>
-            <Button onClick={() => navigate("../registro", {replace: true})} variant="secondary">Fazer registro</Button>
+      <section>
+        <div className="m-8 mt-12 flex flex-col lg:flex-row items-center lg:items-start justify-center lg:justify-start text-center lg:text-start">
+          <div>
+            <h1 className="text-5xl lg:text-6xl font-bold text-slate-800 mb-2 font-normal">Simule seu empréstimo com a <strong className="underline decoration-blue-500">Zenith Credit</strong></h1>
+            <p className="text-lg mb-4 text-slate-600">Com o nosso sistema, você <strong className="font-semibold bg-blue-500/30 p-0.5 rounded-md">poderá realizar simulações de empréstimo direto no site!</strong> Após isso poderá falar com algum de nossos consultores. Aqui você pode simular seu empréstimo sem a necessidade de se cadastrar antes!</p>
+              <Button onClick={() => navigate("../simular-emprestimo", {replace: true})} className="mr-2">Iniciar simulação</Button>
+              <Button onClick={() => navigate("../registro", {replace: true})} variant="secondary">Fazer registro</Button>
+          </div>
+          <img className="md:w-1/2 md:h-1/2 mb-4" src={HomeSvg} alt="Home SVG" height={400} width={400}/>
         </div>
-        <img className="md:w-1/2 md:h-1/2 mb-4" src={HomeSvg} alt="Home SVG" height={400} width={400}/>
       </section>
 
     {/* Sessão 2 */}
-    <section id="services" className="flex flex-col p-2 mb-4 items-center justify-center text-center w-full bg-gradient-to-r from-white to-blue-200">
-    <h2 className="text-3xl mb-4 text-zinc-600">Nossos serviços</h2>
+    <section id="services" className="flex flex-col p-2 mb-4 items-center justify-around text-center w-full bg-gradient-to-r from-blue-900 to-blue-400">
+    <h2 className="text-3xl mb-4 text-white">Nossos serviços</h2>
       <ul className="flex flex-col lg:flex-row gap-1">
         <ServiceCard.Root>
           <ServiceCard.Icon icon={<CircleDollarSign size={65}/>}/>
@@ -62,19 +64,19 @@ export default function Home() {
           <ServiceCard.Icon icon={<Factory size={65}/>}/>
           <ServiceCard.Title title="Empréstimo com Garantia com Imóvel" />
           <ServiceCard.Description description="Oferecemos serviços de empréstimo com garantia com imóvel, caso você não saiba como funciona, clique no botão abaixo 'Saber mais' e retire toda as suas dúvidas!" />
-          <Button onClick={() => navigate("/emprestimos/garantia-imovel")} variant="secondary" className="mt-2">Saber mais</Button>
+          <Button onClick={() => navigate("/emprestimos/garantia-imovel")} className="mt-2">Saber mais</Button>
         </ServiceCard.Root>
 
         <ServiceCard.Root>
           <ServiceCard.Icon icon={<Car size={65}/>}/>
           <ServiceCard.Title title="Empréstimo com Garantia com Veículo" />
           <ServiceCard.Description description="Oferecemos serviços de empréstimo com garantia com veículo, caso você não saiba como funciona, clique no botão abaixo 'Saber mais' e retire toda as suas dúvidas!"/>
-          <Button onClick={() => navigate("/emprestimos/garantia-veiculo")} variant="secondary" className="mt-2">Saber mais</Button>
+          <Button onClick={() => navigate("/emprestimos/garantia-veiculo")} className="mt-2">Saber mais</Button>
         </ServiceCard.Root>
       </ul>
     </section>
         {/* Sessão 3 */}
-      <section className="text-center m-4">
+      <section className="text-center m-24">
         <h2 className="text-3xl mb-4 text-slate-600">Como trabalhamos?</h2>
         <p className="text-lg mb-4 text-slate-600">Este é o processo de como você consegue realizar seu empréstimo</p>
 
@@ -121,20 +123,20 @@ export default function Home() {
       </section>
         
         {/* Sessão 4 */}
-        <section className="flex flex-col items-center mt-2 bg-blue-100/50">
+        <section className="flex flex-col items-center mt-2 bg-blue-900">
         <h1 className="text-3xl mb-4 text-zinc-600 mt-2">Nossos parceiros</h1>
           <h2 className="text-slate-400 text-sm">Algumas das empresas que confia em nosso trabalho ;)</h2>
           <div className="flex flex-col m-4 w-full items-center">
             <div className="flex w-full justify-around gap-4">
-              <img className="h-24" src="https://i.imgur.com/gzo1DHn.png" alt="ITAU" />
-              <img className="h-24" src="https://i.imgur.com/a1rxPSx.png" alt="CashME" />
-              <img className="h-24" src="https://i.imgur.com/OUnzzml.png" alt="Bradesco" />
+              <img className="h-24 bg-blue-700 p-4 rounded-lg" src="https://i.imgur.com/gzo1DHn.png" alt="ITAU" />
+              <img className="h-24 bg-blue-700 p-4 rounded-lg" src="https://i.imgur.com/a1rxPSx.png" alt="CashME" />
+              <img className="h-24 bg-blue-700 p-4 rounded-lg" src="https://i.imgur.com/OUnzzml.png" alt="Bradesco" />
             </div>
             <br/>
             <div className="flex w-full justify-around gap-4">
-              <img className="h-24" src="https://i.imgur.com/9FCiIy8.png" alt="Creditas" />
-              <img className="h-24" src="https://i.imgur.com/FQL4co8.png" alt="BB" />
-              <img className="h-24" src="https://i.imgur.com/axRQRtW.png" alt="Santander" />
+              <img className="h-24 bg-blue-700 p-4 rounded-lg" src="https://i.imgur.com/9FCiIy8.png" alt="Creditas" />
+              <img className="h-24 bg-blue-700 p-4 rounded-lg" src="https://i.imgur.com/FQL4co8.png" alt="BB" />
+              <img className="h-24 bg-blue-700 p-4 rounded-lg" src="https://i.imgur.com/axRQRtW.png" alt="Santander" />
             </div>
           </div>
         </section>
