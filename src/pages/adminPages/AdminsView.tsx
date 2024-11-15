@@ -3,9 +3,8 @@ import axios from "axios";
 
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, ChevronLeft, ChevronRight, Bolt } from "lucide-react";
+import { ChevronLeft, ChevronRight, Bolt } from "lucide-react";
 import toast from "react-hot-toast";
 
 import {
@@ -20,7 +19,6 @@ import {
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -37,11 +35,8 @@ import {
 
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { useNavigate } from "react-router-dom";
-
 import { useAuth } from "@/context/authContext";
 
-const API = import.meta.env.VITE_API_URL;
 
 type Register = {
   _id: string;
@@ -60,7 +55,6 @@ type Register = {
 export default function AdminsView() {
   const { token, user } = useAuth();
   const [registers, setRegisters] = useState<Register[]>([]);
-  const [searchEmail, setSearchEmail] = useState("");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [open, setOpen] = useState(false)
@@ -98,27 +92,6 @@ export default function AdminsView() {
     }
   };
 
-  const searchByEmail = async () => {
-    if (searchEmail === "") {
-      toast.error("O campo não pode estar vazio!");
-      return;
-    }
-    try {
-      const { data } = await axios.get(
-        `${API}/cadastros/find_user_unique?email=${searchEmail}`, {
-          headers: {
-            authorization: `Bearer ${token}`
-          }
-        }
-      );
-      toast.success("Usuário encontrado, redirecionando...");
-      navigate(`../admin/cadastros/${data._id}`);
-    } catch (error: any) {
-      toast.error(error.response.data.error);
-      toast.error("Verifique se digitou corretamente!");
-    }
-  };
-
   const deleteUser = async (id: string) => {
     try {
       const { data } = await axios.delete(
@@ -135,8 +108,6 @@ export default function AdminsView() {
       console.log(error);
     }
   };
-
-  const navigate = useNavigate();
   return (
     <div className="m-6 mt-12">
       <h1 className="text-3xl font-semibold mb-4">Olá {user.nome.split(" "[0])} 👋,</h1>
@@ -144,30 +115,13 @@ export default function AdminsView() {
         <Card>
           <CardHeader>
             <div className="flex flex-col lg:flex-row gap-4 justify-between items-center">
-              <CardTitle>Todos os usuários cadastrados</CardTitle>
-              <div className="flex gap-2">
-                <Input
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      searchByEmail();
-                    }
-                  }}
-                  onChange={(e) => {
-                    setSearchEmail(e.target.value);
-                  }}
-                  className="w-56"
-                  placeholder="Pesquise pelo email"
-                />
-                <Button onClick={searchByEmail}>
-                  <Search />
-                </Button>
-              </div>
+              <CardTitle>Todos os administradores cadastrados</CardTitle>
             </div>
           </CardHeader>
           <CardContent>
             <Table>
               <TableCaption>
-                Lista de todos os usuários cadastrados na Zenith.
+                Lista de todos os administradores cadastrados na Zenith.
               </TableCaption>
               <TableHeader>
                 <TableRow>

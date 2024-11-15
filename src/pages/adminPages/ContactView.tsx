@@ -1,8 +1,8 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
-import { Input } from "@/components/ui/input";
+
 import { Button } from "@/components/ui/button";
-import { Search, ChevronLeft, ChevronRight, Bolt } from "lucide-react";
+import { ChevronLeft, ChevronRight, Bolt } from "lucide-react";
 
 import {
   Table,
@@ -142,12 +142,6 @@ export default function ContactView() {
           <CardHeader>
             <div className="flex flex-col lg:flex-row gap-4 justify-between items-center">
               <CardTitle>Todos os contatos pendentes</CardTitle>
-              <div className="flex gap-2">
-                <Input className="w-56" placeholder="Pesquise pelo email" />
-                <Button>
-                  <Search />
-                </Button>
-              </div>
             </div>
           </CardHeader>
           <CardContent>
