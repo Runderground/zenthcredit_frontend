@@ -30,10 +30,13 @@ import {
   Button
 } from '@/components/ui/button'
 
+import { useNavigate } from 'react-router-dom'
+
 export default function SimuladorDeEmprestimo() {
   let [valor, setValor] = useState(0);
   let [meses, setMeses] = useState(0);
   let [juros, setJuros] = useState("0")
+  const navigate = useNavigate()
 
   const handleSliderChange = (newValue: number[]) => {
     setValor(newValue[0]);
@@ -146,7 +149,7 @@ export default function SimuladorDeEmprestimo() {
               </div>
             </div>
             <br/>
-            <Button className="w-1/2">Fazer cadastro</Button>
+            <Button onClick={() => navigate("../registro", {replace: true})} className="w-1/2">Fazer cadastro</Button>
             <p className="text-md text-slate-400 font-semibold">Ficou interessado? Faça seu cadastro para algum de nossos consultores entrar em contato.</p>
           </CardContent>
         </Card>

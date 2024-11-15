@@ -15,22 +15,22 @@ export default function Home() {
     {
       url: ApiSVG,
       title: "Simular Empréstimo / Financiamento",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      text: "Com nosso sistema, você pode simular seu empréstimo sem precisar se cadastrar! Nosso site oferece essa facilidade para que você possa ter uma ideia do valor do seu empréstimo antes de entrar em contato com nossos consultores.",
     },
     {
       url: DocSVG,
       title: "Verificação de Documentos",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      text: "Nesta etapa, os nossos consultores analisarão cuidadosamente os documentos fornecidos. A segurança dos seus dados é nossa prioridade, eles são armazenados com o máximo de cuidado e proteção.",
     },
     {
       url: SupportSVG,
       title: "Faça uma consulta conosco",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      text: "Nesta fase, nossos consultores entrarão em contato para um processo de avaliação mais detalhado, garantindo que você receba a melhor solução de empréstimo para suas necessidades.",
     },
     {
       url: AprovedSVG,
       title: "Aprovação",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      text: "Nesta fase, você irá receber a aprovação do seu empréstimo! Com a melhor oferta do mercado, você terá a chance de realizar seus sonhos e projetos. Nossa equipe trabalha incansavelmente para oferecer as melhores taxas e condições, garantindo que você tenha a melhor experiência possível.",
     },
   ]
   
@@ -115,12 +115,15 @@ export default function Home() {
             <img className="w-48 h-48 lg:h-64 lg:w-64" src={AprovedSVG} alt="API SVG"/>
           </div>
 
-          <Button className="lg:w-1/3 lg:self-center">Iniciar simulação</Button>
+          <Button onClick={() => navigate("../simular-emprestimo", {replace: true})} className="lg:w-1/3 lg:self-center">Iniciar simulação</Button>
           
         </div>
       </section>
+        
+        {/* Sessão 4 */}
         <section className="flex flex-col items-center mt-2 bg-blue-100/50">
-        <h1 className="text-2xl font-semibold text-slate-600">Nossos parceiros</h1>
+        <h1 className="text-3xl mb-4 text-zinc-600 mt-2">Nossos parceiros</h1>
+          <h2 className="text-slate-400 text-sm">Algumas das empresas que confia em nosso trabalho ;)</h2>
           <div className="flex flex-col m-4 w-full items-center">
             <div className="flex w-full justify-around gap-4">
               <img className="h-24" src="https://i.imgur.com/gzo1DHn.png" alt="ITAU" />
