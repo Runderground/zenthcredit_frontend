@@ -165,8 +165,9 @@ export default function SideBar() {
 
   return (
     <Sidebar>
-      <SidebarHeader className="text-2xl font-semibold">
-        Zenith Credit
+      <SidebarHeader className="flex flex-row text-lg items-center font-semibold">
+        <img src="https://i.imgur.com/j4QZ5vg.png" alt="Logo" className="h-20 w-20"/>
+        <h2 className="uppercase">Zenith Credit</h2>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
@@ -205,7 +206,7 @@ export default function SideBar() {
                   <CollapsibleContent>
                     <SidebarMenuSub>
                       {loanItems.map((item) => (
-                        <SidebarMenuSubButton asChild>
+                        <SidebarMenuSubButton key={item.title} asChild>
                           <Link to={item.url}>
                             <item.icon />
                             <span>{item.title}</span>

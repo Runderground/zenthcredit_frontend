@@ -29,10 +29,8 @@ function App() {
           <SideBar />
           <main className="w-full h-full">
             <header className="flex fixed bg-white w-full shadow-sm h-8 z-20">
-              <SidebarTrigger size={"sm"} />
-              <h2 className="text-2xl font-bold uppercase text-slate-500 text-center ml-4">
-                Zenith Credit
-              </h2>
+              <SidebarTrigger size={"lg"} />
+              <h2 className="self-center font-bold text-blue-500 uppercase text-2xl">Zenith Credit</h2>
               <div></div>
             </header>
             <Routes>

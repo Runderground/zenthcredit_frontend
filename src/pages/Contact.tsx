@@ -42,7 +42,6 @@ export default function Contact() {
       form.reset()
       toast.success(`Formulário enviado, entraremos em contato em breve!`)
     } catch (error:any) {
-      toast.error(import.meta.env.VITE_HELLOWORLD)
       toast.error(error.response.data.error)
     }
   }
