@@ -37,6 +37,8 @@ interface IContact {
   comentario: string;
 }
 
+import { useNavigate } from "react-router-dom";
+
 export default function Dashboard() {
   const { token } = useAuth();
   const [cadastroTotal, setCadastroTotal] = useState<number>(0);
@@ -44,6 +46,7 @@ export default function Dashboard() {
   const [contatoTotal, setContatoTotal] = useState<number>(0);
   const [ultimosContatos, setUltimosContatos] = useState<IContact[]>([])
   const [ultimosCadastros, setUltimosCadastros] = useState<Register[]>([])
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function getUltimosCadastros() {
@@ -192,13 +195,13 @@ export default function Dashboard() {
               <AvatarFallback className="bg-blue-400 text-white font-semibold">{cadastro.nome.charAt(0)}</AvatarFallback>
             </Avatar>
             <div className="flex flex-col">
-              <h4 className="font-bold text-slate-700">{cadastro.nome}</h4>
-              <span className="text-slate-500 text-sm">
+              <h4 className="font-bold text-slate-700">{cadastro.nome.split(" ")[0]}</h4>
+              <span className="text-slate-500 text-xs">
                 {cadastro.email}
               </span>
             </div>
           </div>
-          <Button className="bg-blue-500 hover:bg-blue-600">Ver</Button>
+          <Button onClick={() => navigate(`../admin/cadastros/${cadastro._id}`, {replace: true})} className="bg-blue-500 hover:bg-blue-600">Ver</Button>
         </div>
       ))
             ) : "Não há cadastros"}
@@ -225,7 +228,7 @@ export default function Dashboard() {
             <AvatarFallback className="bg-green-400 text-white font-semibold">{contato.nome.charAt(0)}</AvatarFallback>
             </Avatar>
             <div className="flex flex-col">
-              <h4 className="font-bold text-slate-700">{contato.nome}</h4>
+              <h4 className="font-bold text-slate-700">{contato.nome.split(" ")[0]}</h4>
               <span className="text-slate-500 text-sm">
                 {contato.telefone}
               </span>
