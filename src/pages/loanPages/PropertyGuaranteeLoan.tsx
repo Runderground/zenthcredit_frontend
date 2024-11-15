@@ -43,7 +43,6 @@ export default function PropertyGuaranteeLoan() {
             <p className="text-2xl text-slate-500 text-justify">Para fazer o empréstimo com garantia de imóvel, o processo é online, rápido e seguro. Na Zenith Credit, você faz o cadastro e, em um curto período de tempo um dos nossos consultores irá entrar em contato! Ou você pode falar com um neste exato momento clicando no botão abaixo.</p>
           </div>
         </div>
-        <Button onClick={handleWhatsApp} className="bg-green-500 hover:bg-green-600 w-full"><BsWhatsapp/>Chamar no WhatsApp</Button>
       </section>
     </>
   )

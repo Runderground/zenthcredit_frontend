@@ -45,7 +45,6 @@ export default function VehicleGuaranteeLoan() {
             <p className="text-2xl text-slate-500 text-justify">Fazer um empréstimo com garantia de veículo é fácil 100% online. Com valores maiores, prazos mais longos e taxas reduzidas, o processo é simples: faça seu cadastro, aguarde um dos nossos consultores entrar em contato.</p>
           </div>
         </div>
-        <Button onClick={handleWhatsApp} className="bg-green-500 hover:bg-green-600 w-full"><BsWhatsapp/>Chamar no WhatsApp</Button>
       </section>
     </>
   )
