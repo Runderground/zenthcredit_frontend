@@ -74,7 +74,7 @@ export default function RegisterView() {
 
   return (
     <>
-      <section className="m-4 mt-12">
+      <section className="m-4 mt-20">
         <div className="flex gap-4 items-center mb-4">
           <Link to="/admin/cadastros">
             <ChevronLeft />

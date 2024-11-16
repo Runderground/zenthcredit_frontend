@@ -11,9 +11,8 @@ export default function VehicleGuaranteeLoan() {
   return (
     <>
       <section className="bg-cover bg-center h-96" style={{backgroundImage: "url('https://i.imgur.com/584j2op.png')"}}>
-
         <div className="relative z-10 flex items-center ml-2 justify-start h-full text-white">
-          <div className="flex flex-col m-12">
+          <div className="flex flex-col mt-20">
             <h1 className="text-3xl font-semibold text-shadow">Empréstimo com garantia de Veículo</h1>
             <p>Condições sob medida, com parcelas acessíveis e taxas que facilitam.</p>
             <div className="mt-2">
@@ -45,7 +44,6 @@ export default function VehicleGuaranteeLoan() {
             <p className="text-2xl text-slate-500 text-justify">Fazer um empréstimo com garantia de veículo é fácil 100% online. Com valores maiores, prazos mais longos e taxas reduzidas, o processo é simples: faça seu cadastro, aguarde um dos nossos consultores entrar em contato.</p>
           </div>
         </div>
-        <Button onClick={handleWhatsApp} className="bg-green-500 hover:bg-green-600 w-full"><BsWhatsapp/>Chamar no WhatsApp</Button>
       </section>
     </>
   )

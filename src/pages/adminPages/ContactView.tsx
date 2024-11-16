@@ -54,6 +54,7 @@ export default function ContactView() {
   const [contacts, setContacts] = useState<IContact[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
+  const [open, setOpen] = useState<boolean>(false)
 
   const { token, user } = useAuth();
 
@@ -116,6 +117,7 @@ export default function ContactView() {
       );
       const newContacts = contacts.filter(contact => contact._id !== id)
       setContacts(newContacts)
+      setOpen(false)
       toast.success(data.success)
     } catch (error) {
       console.log(error);
@@ -135,7 +137,7 @@ export default function ContactView() {
   };
 
   return (
-    <div className="m-6 mt-12">
+    <div className="m-6 mt-20">
       <h1 className="text-3xl font-semibold mb-4">Olá {user.nome.split(" "[0])} 👋,</h1>
       <section>
         <Card>
@@ -176,7 +178,7 @@ export default function ContactView() {
                             <DropdownMenuItem onClick={() => handleWhatsapp(contact.telefone)}>
                               Chamar no WhatsApp
                             </DropdownMenuItem>
-                            <Dialog>
+                            <Dialog open={open} onOpenChange={() => setOpen(!open)}>
                               <DialogTrigger className="p-1 text-sm hover:bg-slate-100 w-full text-start rounded">
                                 <span className="ml-1">Deletar contato</span>
                               </DialogTrigger>

@@ -88,7 +88,7 @@ export default function MultiStepForm() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center m-4 mt-12">
+    <div className="flex flex-col items-center justify-center m-4 mt-20">
       <div className="flex flex-col text-center mb-8">
         <h1 className="font-bold text-3xl text-slate-600 uppercase">Registro</h1>
         <p className="text-slate-400">

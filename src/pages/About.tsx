@@ -5,7 +5,7 @@ import LocalizationSVG from '../assets/Localization.svg'
 export default function About() {
   return (
     <>
-      <section className="flex flex-col items-center m-4 mt-12 text-center">
+      <section className="flex flex-col items-center m-20 lg:mr-72 lg:ml-72 mt-20 text-center">
         <img src={TeamSVG} alt="Team" className="w-1/2 lg:w-1/4"/>
         <h2 className="text-2xl text-slate-500 font-semibold mb-5">Quem somos?</h2>
         <h1 className="text-4xl text-blue-500 font-bold">Zenith Credit</h1>

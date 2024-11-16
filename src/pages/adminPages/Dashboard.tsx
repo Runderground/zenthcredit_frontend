@@ -151,7 +151,7 @@ export default function Dashboard() {
     },
   ];
   return (
-    <div className="m-4 mt-12 p-4">
+    <div className="m-4 mt-20 p-4">
       <h1 className="text-3xl text-slate-800 uppercase mb-4">
         Painel de <strong>Administração</strong>
       </h1>

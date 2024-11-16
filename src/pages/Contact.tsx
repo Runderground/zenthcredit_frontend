@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from '@/components/ui/textarea'
 import axios from 'axios'
 import toast from 'react-hot-toast'
+import { useState } from 'react'
 
 const formSchema = z.object({
   nome: z.string().nonempty({message: "Este campo é obrigatório"}).min(3, {message: "O seu nome deve ter no mínimo 3 caracteres"}).max(50, {message: "Você excedeu o limite de caracteres, caso precise, abrevie seu nome. Ex: João S. Silva"}).regex(/^[a-zA-Z0-9\s]*$/, {message: "Não é permitido caracteres especiais"}),
@@ -25,6 +26,8 @@ const formSchema = z.object({
 })
 
 export default function Contact() {
+
+  const [loading,setLoading] = useState<boolean>(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -37,17 +40,20 @@ export default function Contact() {
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setLoading(true)
     try {
       await axios.post(`${import.meta.env.VITE_API_URL}/contatos/register`, values)
       form.reset()
+      setLoading(false)
       toast.success(`Formulário enviado, entraremos em contato em breve!`)
     } catch (error:any) {
+      setLoading(false)
       toast.error(error.response.data.error)
     }
   }
   
   return (
-    <section className="flex flex-col lg:flex-row m-4 lg:m-12 items-center justify-center lg:justify-between">
+    <section className="flex flex-col lg:flex-row m-4 mt-20 items-center justify-center lg:justify-between">
       <img className="w-64 h-64 lg:w-1/2 lg:h-1/2 lg:mr-4" src={ContactSVG} alt="Contact SVG"/>
       <div className="border-slate-300 border-2 rounded p-8">
         <h2 className="font-semibold text-3xl text-slate-700">Fale Conosco</h2>
@@ -110,7 +116,7 @@ export default function Contact() {
                 </FormItem>
               )}
               />
-            <Button className="mb-4" type="submit">Enviar</Button>
+            <Button disabled={loading} className="mb-4" type="submit">{loading ? "Aguarde..." : "Enviar"}</Button>
           </form>
         </Form>
         <span className="text-slate-500">Após o envio, algum de nossos atendentes irá tentar entrar em contato.</span>
