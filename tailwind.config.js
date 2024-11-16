@@ -19,7 +19,7 @@ export default {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
-  				DEFAULT: 'rgba(47,106,230, .3)',
+  				DEFAULT: 'hsl(var(--card-background))',
   				foreground: 'hsl(var(--card-foreground))'
   			},
   			popover: {
