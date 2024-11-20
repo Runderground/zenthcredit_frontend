@@ -130,7 +130,7 @@ export default function SimuladorDeEmprestimo() {
             <ChartArea/>
           </div>
           <div className="flex flex-col gap-4 items-center justify-center">
-            <h1 className="text-2xl font-semibold text-slate-600 text-center">Parcelas Mensais</h1>
+            <h1 className="text-2xl font-semibold text-slate-600 text-center">Parcelas Mensais ( {meses} )</h1>
             <h2 className="text-4xl font-bold text-blue-500"> {parcelas.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</h2>
             <span className="text-slate-500 font-semibold text-sm">taxas de juros incluídos</span>
             <div className="grid mt-4 grid-cols-1 gap-4">
