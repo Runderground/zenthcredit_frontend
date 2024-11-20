@@ -15,6 +15,7 @@ import Bradesco from '../assets/Brands/Bradesco.png'
 import Creditas from '../assets/Brands/Creditas.png'
 import CashMe from '../assets/Brands/CashMe.png'
 import { useNavigate } from 'react-router-dom'
+import Footer from '../components/Footer'
 
 export default function Home() {
 
@@ -176,6 +177,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+        <Footer/>
     </>
   )
 }

@@ -52,13 +52,16 @@ export default function SimuladorDeEmprestimo() {
   }
 
   let parcelas = calcularParcela(valor, juros, meses)
+/*
+  Função para visualizar o total com Juros incluido ( descontinuado )
+  
+  */
+  // function calcularTotalComJuros(valorComJuros: number | string, parcelas: number) {
+  //   const total = Number(valorComJuros) * parcelas
+  //   return Number(total.toFixed(2))
+  // }
 
-  function calcularTotalComJuros(valorComJuros: number | string, parcelas: number) {
-    const total = Number(valorComJuros) * parcelas
-    return Number(total.toFixed(2))
-  }
-
-  let totalComJuros = calcularTotalComJuros(parcelas, meses)
+  // let totalComJuros = calcularTotalComJuros(parcelas, meses)
   
   return (
     <section className="m-4 mt-20 flex flex-col items-center">
@@ -136,11 +139,6 @@ export default function SimuladorDeEmprestimo() {
               <span className="text-sm font-semibold text-slate-400">Valor do empréstimo</span>
               <h2 className="text-3xl text-slate-600 text-center font-bold">{valor.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</h2>
             </div>
-
-              <div className="flex gap-2 flex-col items-center bg-blue-200 p-4 rounded-lg">
-                <span className="text-sm font-semibold text-blue-400">Valor total á pagar</span>
-                <h2 className="text-3xl text-blue-500 text-center font-bold">{totalComJuros.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</h2>
-              </div>
             </div>
             <br/>
             <Button onClick={() => navigate("../registro", {replace: true})} className="w-1/2">Fazer cadastro</Button>
