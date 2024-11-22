@@ -1,13 +1,12 @@
-import TeamSVG from '../assets/Team.svg'
-import LocalizationSVG from '../assets/Localization.svg'
+import TeamSVG from '../assets/Team.jpg'
 
 
 export default function About() {
   return (
     <>
-      <section className="flex flex-col items-center m-20 lg:mr-72 lg:ml-72 mt-20 text-center">
-        <img src={TeamSVG} alt="Team" className="w-1/2 lg:w-1/4"/>
-        <h2 className="text-2xl text-slate-500 font-semibold mb-5">Quem somos?</h2>
+      <section className="flex flex-col items-center m-12 lg:mr-72 lg:ml-72 mt-20 text-center">
+        <img src={TeamSVG} alt="Team" className="w-1/2 rounded-lg"/>
+        <h2 className="text-2xl text-slate-500 font-semibold mb-2">Quem somos?</h2>
         <h1 className="text-4xl text-blue-500 font-bold">Zenith Credit</h1>
         <div className="flex flex-col gap-4 text-justify m-6">
           <p className="text-slate-600">Na Zenith Credit, acreditamos que todo brasileiro merece acesso a um crédito justo e descomplicado. Nossa missão é oferecer soluções financeiras que proporcionem mais tranquilidade e autonomia, combatendo o endividamento abusivo com taxas acessíveis, prazos alongados e parcelas que cabem no seu orçamento.</p>
@@ -15,8 +14,8 @@ export default function About() {
           <p className="text-slate-600">Na Zenith Credit, valorizamos a transparência e a eficiência, com tecnologia que facilita e uma equipe dedicada a transformar sua relação com o crédito. Estamos ao seu lado para que seus bens e conquistas possam levá-lo ainda mais longe, sempre com confiança e segurança.</p>
         </div>
       </section>
-      <section className="flex flex-col items-center m-4 mt-12 text-center">
-        <img src={LocalizationSVG} alt="Team" className="w-1/2 lg:w-1/4"/>
+      <section className="flex flex-col items-center m-4 text-center">
+        {/* <img src={LocalizationSVG} alt="Team" className="w-1/2 lg:w-1/4"/> */}
         <h2 className="text-2xl text-slate-500 font-semibold mb-5">Aonde estamos?</h2>
         <h1 className="text-4xl text-blue-500 font-bold">Localização</h1>
         <div className="flex flex-col gap-2 text-center m-6">

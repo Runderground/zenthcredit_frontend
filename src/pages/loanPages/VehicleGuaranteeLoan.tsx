@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { BsWhatsapp } from 'react-icons/bs'
-import CarSVG from '../../assets/Loans/Car.svg'
+import CarSVG from '../../assets/Loans/Car.png'
 import { Link } from 'react-router-dom' 
 
 export default function VehicleGuaranteeLoan() {
@@ -22,7 +22,7 @@ export default function VehicleGuaranteeLoan() {
         </div>
       </section>
       <section className="flex flex-col lg:flex-row text-center lg:text-start m-4">
-        <img className="h-96 self-center" src={CarSVG} alt="Car SVG"/>
+        <img className="h-96 self-center rounded-lg m-2" src={CarSVG} alt="Car SVG"/>
         <div className='lg:mt-8 flex flex-col gap-4'>
           <h1 className="font-bold text-4xl text-slate-700">O que é um empréstimo com garantia de veículo?</h1>
           <p className="text-2xl text-slate-500 text-justify">O empréstimo com garantia de veículo é um tipo de empréstimo em que o seu veículo é colocado como garantia para a instituição financeira.</p>

@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import Home from "./pages/Home";
 import SideBar from "./components/SideBar";
-import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
@@ -69,7 +68,6 @@ function App() {
               <Route path="/admin/cadastros/:id" element={token ? <RegisterView /> : <Home/>} />
             </Routes>
             <WhatsAppButton />
-            <Footer />
             <Toaster
               position="bottom-right"
               toastOptions={{

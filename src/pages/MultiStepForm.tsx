@@ -9,7 +9,13 @@ import { z } from "zod";
 import axios from 'axios'
 
 import { useNavigate } from 'react-router-dom'
-
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogDescription,
+  DialogTitle
+} from '@/components/ui/dialog'
 import InputMask from 'react-input-mask'
 
 import {
@@ -25,7 +31,7 @@ import toast from 'react-hot-toast'
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import {
   Select,
@@ -36,7 +42,7 @@ import {
 } from '@/components/ui/select'
 
 const formSchema = z.object({
-  nome: z.string().nonempty({message: "Este campo é obrigatório"}).min(3, {message: "Este campo deve conter pelo menos 3 caracteres."}).max(50, {message: "Você excedeu o limite de caracteres, abrevie o nome caso seja grande."}).regex(/^[a-zA-Z\s]*$/, {message: "Não é permitido caracteres especiais e números."}),
+  nome: z.string().nonempty({message: "Este campo é obrigatório"}).min(3, {message: "Este campo deve conter pelo menos 3 caracteres."}).max(50, {message: "Você excedeu o limite de caracteres, abrevie o nome caso seja grande."}).regex(/^[a-zA-Z\s.áéíóúâêîôûãõçÁÉÍÓÚÂÊÎÔÛÃÕÇàèìòùÀÈÌÒÙ]*$/, {message: "Não é permitido caracteres especiais e números."}),
   email: z.string().nonempty({message: "Este campo é obrigatório"}).email({message: "Insira um email válido!"}).min(4).max(100),
   telefone: z.string().nonempty({message: "Este campo é obrigatório"}).min(15,{message: "Insira um número válido!"}),
   cpf: z.string().min(14, {message: "Ínsira um CPF válido!"}),
@@ -52,6 +58,7 @@ export default function MultiStepForm() {
   const [step, setStep] = useState(0);
   const [loading, setLoading] = useState(false)
   const stepTitle = ["Informações Gerais", "Análise de Perfil", "Análise de Garantia"]
+  const submitBtn = useRef<HTMLButtonElement>(null)
 
   const navigate = useNavigate()
 
@@ -323,10 +330,9 @@ export default function MultiStepForm() {
                         </FormItem>
                       )}
                     />
-                    <span></span>
                   </div>
                 }
-                <div className={`bg-yellow-200 p-2 rounded-lg border border-yellow-300 ${step === 2 ? "block" : "hidden"}`}>
+                {/* <div className={`bg-yellow-200 p-2 rounded-lg border border-yellow-300 ${step === 2 ? "block" : "hidden"}`}>
                   <span className="text-sm text-yellow-600">Atenção: Caso não conclua o registro após apertar Concluir, volte as etapas e verifique se está tudo certo!</span>
                 </div>
                 <Button
@@ -335,10 +341,14 @@ export default function MultiStepForm() {
                   disabled={loading}
                 >
                   {loading ? 'Aguarde...' : 'Concluir'}
-                </Button>
+                </Button> */}
+                <br/>
+                <div className="flex justify-end gap-2">
+                  <button type="submit" hidden ref={submitBtn}></button>
+                </div>
               </form>
             </Form>
-            <div className="flex mt-6 justify-end gap-4">
+            <div className="flex justify-end gap-2">
               <Button
                 className={`${step > 0 ? "block" : "hidden"}`}
                 variant="outline"
@@ -353,6 +363,36 @@ export default function MultiStepForm() {
               >
                 Avançar
               </Button>
+              <Dialog>
+                <DialogTrigger>
+                  <Button className={`bg-green-400 hover:bg-green-500 mb-2 ${step === 2 ? "block" : "hidden"}`}>Cadastrar</Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogTitle>AUTORIZAÇÃO PARA DISPONIBILIZAÇÃO</DialogTitle>
+                  <DialogDescription>
+                    <span>Ao clicar <strong>Concluir</strong> você estará aceitando os seguintes termos:</span>
+                  </DialogDescription>
+                  <div className="border border-slate-300 p-4 rounded-lg">
+                    <span>
+                      Autorização para Disponibilização de histórico de crédito
+                    </span>
+                    <p>Autorizo os gestores de banco de dados de que trata a Lei Nº 12.414, de 9 de junho de 2011, disponibilizar ao Correspondente J M S GROUP LTDA, CNPJ 55.395.267/0001-17 ( Zenith Credit ), o meu histórico de crédito, o qual abrangerá os dados financeiros e de pagamentos relativos aos operadores de crédito e obrigações de pagamento adimplidas em seus respectivos vencimentos, e aquelas a vencer, constantes de banco(s) de dados, com a finalidade única e exclusiva de subsidiar a análise e a eventual concessão de crédito,a venda a prazo ou outras transações comerciais e empresariais que impliquem risco financeiro.</p>
+                    <p>Esta autorização tem validade de até 3 ( três ) meses a contar da presente data.</p>
+                    <p>Estou ciente de que poderei revogar, a qualquer tempo, esta autorização, perante o gestor de banco de dados.</p>
+                  </div>
+                  <div className={`bg-yellow-200 p-2 rounded-lg border border-yellow-300 ${step === 2 ? "block" : "hidden"}`}>
+                    <span className="text-sm text-yellow-600">Atenção: Caso não conclua o registro após apertar Concluir, volte as etapas e verifique se está tudo certo!</span>
+                  </div>
+                    <Button
+                      className={`bg-green-400 hover:bg-green-500 text-white hover:text-white ${step > 0 ? "block" : "hidden"}`}
+                      variant="outline"
+                      onClick={() => submitBtn.current?.click()}
+                      disabled={loading}
+                    >
+                      {loading ? 'Aguarde...' : 'Concluir'}
+                    </Button>
+                </DialogContent>
+              </Dialog>
             </div>
           </CardContent>
         </Card>

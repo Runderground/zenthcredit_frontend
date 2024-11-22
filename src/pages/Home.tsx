@@ -1,11 +1,11 @@
-import HomeSvg from '../assets/Home_Section_One.svg'
+import HomeSvg from '../assets/Home_Section_One.png'
 import {Button} from '@/components/ui/button'
 import { ServiceCard } from '../components/serviceCard/index'
 import { CircleDollarSign, Car, Factory } from 'lucide-react'
-import ApiSVG from '../assets/How_we_works/Aplication.svg'
-import DocSVG from '../assets/How_we_works/Documents.svg'
-import AprovedSVG from '../assets/How_we_works/Aproved.svg'
-import SupportSVG from '../assets/How_we_works/Support.svg'
+import ApiSVG from '../assets/How_we_works/Aplication.png'
+import DocSVG from '../assets/How_we_works/Documents.png'
+import AprovedSVG from '../assets/How_we_works/Aproved.png'
+import SupportSVG from '../assets/How_we_works/Support.png'
 
 // Parceiros
 import Itau from '../assets/Brands/Itau.png'
@@ -15,6 +15,7 @@ import Bradesco from '../assets/Brands/Bradesco.png'
 import Creditas from '../assets/Brands/Creditas.png'
 import CashMe from '../assets/Brands/CashMe.png'
 import { useNavigate } from 'react-router-dom'
+import Footer from '../components/Footer'
 
 export default function Home() {
 
@@ -80,13 +81,13 @@ export default function Home() {
         {/* Sessão 1 */}
       <section>
         <div className="m-8 p-2 mt-20 flex flex-col lg:flex-row items-center lg:items-center justify-center lg:justify-start text-center lg:text-start">
-          <div>
+          <div className="mb-4">
             <h1 className="text-5xl lg:text-6xl font-bold text-slate-800 mb-2 font-normal">Simule seu empréstimo com a <strong className="text-blue-500 font-semibold">Zenith Credit</strong></h1>
             <p className="text-3xl mb-4 text-slate-600">Com o nosso sistema, você <strong className="font-semibold text-blue-500">poderá realizar simulações de empréstimo direto no site!</strong> Após isso poderá falar com algum de nossos consultores. Aqui você pode simular seu empréstimo sem a necessidade de se cadastrar antes!</p>
               <Button onClick={() => navigate("../simular-emprestimo", {replace: true})} className="mr-2">Iniciar simulação</Button>
               <Button onClick={() => navigate("../registro", {replace: true})} variant="secondary">Fazer registro</Button>
           </div>
-          <img className="md:w-1/2 md:h-1/2 mb-4" src={HomeSvg} alt="Home SVG" height={400} width={400}/>
+          <img className="lg:w-[600px] lg:h-[600px]mb-4 bg-gradient-to-t from-blue-200 to-blue-100 rounded-full" src={HomeSvg} alt="Home SVG" height={400} width={400}/>
         </div>
       </section>
 
@@ -137,7 +138,7 @@ export default function Home() {
 
           <div className="flex flex-col gap-8 lg:m-16 lg:gap-2">
             <div className="flex items-center">
-              <img className="w-48 h-48 lg:h-64 lg:w-64" src={ApiSVG} alt="API SVG"/>
+              <img className="w-48 h-48 lg:h-64 lg:w-64 mr-4 rounded-full" src={ApiSVG} alt="API SVG"/>
               <div>
                 <h3 className="text-2xl text-green-500 font-bold mb-2 text-start">{HowWeWorks[0].title}</h3>
                 <p className="text-slate-300 text-start">{HowWeWorks[0].text}</p>
@@ -150,12 +151,12 @@ export default function Home() {
                 <h3 className="text-2xl text-green-500 font-bold mb-2 text-end">{HowWeWorks[1].title}</h3>
                 <p className="text-slate-300 text-end">{HowWeWorks[1].text}</p>
               </div>
-              <img className="w-48 h-48 lg:h-64 lg:w-64" src={DocSVG} alt="API SVG"/>
+              <img className="w-48 h-48 lg:h-64 lg:w-64 ml-4 rounded-full" src={DocSVG} alt="API SVG"/>
             </div>
 
 
             <div className="flex items-center">
-              <img className="w-48 h-48 lg:h-64 lg:w-64" src={SupportSVG} alt="API SVG"/>
+              <img className="w-48 h-48 lg:h-64 lg:w-64 mr-4 rounded-full" src={SupportSVG} alt="API SVG"/>
               <div>
                 <h3 className="text-2xl text-green-500 font-bold mb-2 text-start">{HowWeWorks[2].title}</h3>
                 <p className="text-slate-300 text-start">{HowWeWorks[2].text}</p>
@@ -168,7 +169,7 @@ export default function Home() {
                 <h3 className="text-2xl text-green-500 font-bold mb-2 text-end">{HowWeWorks[3].title}</h3>
                 <p className="text-slate-300 text-end">{HowWeWorks[3].text}</p>
               </div>
-              <img className="w-48 h-48 lg:h-64 lg:w-64" src={AprovedSVG} alt="API SVG"/>
+              <img className="w-48 h-48 lg:h-64 lg:w-64 ml-4 rounded-full" src={AprovedSVG} alt="API SVG"/>
             </div>
 
             <Button onClick={() => navigate("../simular-emprestimo", {replace: true})} variant="outline" className="lg:w-1/3 lg:self-center">Iniciar simulação</Button>
@@ -176,6 +177,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+        <Footer/>
     </>
   )
 }
