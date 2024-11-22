@@ -348,9 +348,10 @@ export default function MultiStepForm() {
                   </div>
                 }
                 {step == 3 &&
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4">
                   <div className="flex flex-col gap-2">
-                    <h3>Comprovante de residência</h3>
+                    <h3 className="text-sm font-semibold">Comprovante de residência</h3>
+                    <span className="flex flex-1 text-xs text-blue-500 bg-blue-200 p-2 rounded-lg border border-blue-400">Deve ser uma conta de luz, água, telefone, etc. que esteja o endereço visível com seu nome ou de um terceiro. ( O CEP deve ser preenchido exatamente como o da foto )</span>
                     <div>
                       <Button
                         variant={"outline"}
@@ -359,7 +360,8 @@ export default function MultiStepForm() {
                     <input type="file" ref={residenciaBtn} onChange={(e) => setResidencia(e.target.files?.[0])} accept="" hidden/>
                   </div>
                   <div className="flex flex-col gap-2">
-                    <h3>Comprovante de Renda</h3>
+                    <h3 className="text-sm font-semibold">Comprovante de Renda</h3>
+                    <span className="flex flex-1  text-xs text-blue-500 bg-blue-200 p-2 rounded-lg border border-blue-400">Pode ser um extrato bancário, contracheque, declaração de imposto de renda, etc.</span>
                     <div>
                       <Button
                         variant={"outline"}
@@ -368,7 +370,8 @@ export default function MultiStepForm() {
                     <input type="file" onChange={(e) => setRenda(e.target.files?.[0])} ref={rendaBtn} accept="" hidden/>
                   </div>
                   <div className="flex flex-col gap-2">
-                    <h3>Identidade ( RG ou CNH )</h3>
+                    <h3 className="text-sm font-semibold">Identidade ( RG ou CNH )</h3>
+                    <span className="flex flex-1 text-xs text-blue-500 bg-blue-200 p-2 rounded-lg border border-blue-400">Deve ser uma única foto do seu RG ou CNH aberto. ( O nome, data de nascimento e CPF devem estar preenchidos exatamente como está no RG/CNH )</span>
                     <div>
                       <Button
                         variant={"outline"}
