@@ -54,6 +54,13 @@ export default function RegisterView() {
     motivo: "",
     garantia: "",
     cep: "",
+    documentos: [
+      {
+          comprovante_renda: "",
+        identidade: "",
+        residencia: "",
+      }
+    ]
   });
 
   useEffect(() => {
@@ -177,6 +184,7 @@ export default function RegisterView() {
                 </strong>{" "}
                 {user.garantia}
               </span>
+              <img src={user.documentos[0].comprovante_renda} alt="Test"/>
             </div>
           </CardContent>
         </Card>

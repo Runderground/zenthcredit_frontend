@@ -426,7 +426,7 @@ export default function MultiStepForm() {
                   <DialogDescription>
                     <span>Ao clicar <strong>Concluir</strong> você estará aceitando os seguintes termos:</span>
                   </DialogDescription>
-                  <div className="border border-slate-300 p-4 rounded-lg">
+                  <div className="border border-slate-300 h-[300px] p-4 rounded-lg">
                     <span>
                       Autorização para Disponibilização de histórico de crédito
                     </span>
