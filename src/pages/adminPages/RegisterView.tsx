@@ -6,7 +6,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 
 import { Card, CardTitle, CardHeader, CardContent } from "@/components/ui/card";
 
-import { ChevronLeft, Trash } from "lucide-react";
+import { ChevronLeft, Trash, Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
 
@@ -184,7 +184,31 @@ export default function RegisterView() {
                 </strong>{" "}
                 {user.garantia}
               </span>
-              <img src={user.documentos[0].comprovante_renda} alt="Test"/>
+            </div>
+          </CardContent>
+        </Card>
+        <br/>
+        <Card>
+          <CardHeader className="flex flex-row justify-between items-center">
+              <CardTitle>Verificação de Identidade</CardTitle>
+              <Button className="bg-yellow-500 hover:bg-yellow-600"><Pencil/></Button>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col justify-center m-4 items-center">
+              <div className="flex flex-col gap-12 w-full">
+                <div className="flex flex-col items-center text-blue-400 font-semibold text-lg lg:text-3xl">
+                  <span className="mb-2">Identidade</span>
+                  <img className="rounded-lg lg:w-72" onClick={() => {window.open(`${user.documentos[0].identidade}`)}} src={user.documentos[0].identidade} width={150} height={200} alt="Identidade"/>
+                </div>
+                <div className="flex flex-col text-lg lg:text-3xl items-center text-blue-400 font-semibold">
+                  <span className="mb-2">Comprovante de Renda</span>
+                  <img className="rounded-lg" onClick={() => {window.open(`${user.documentos[0].comprovante_renda}`)}} src={user.documentos[0].comprovante_renda} width={150} height={200} alt="Identidade"/>
+                </div>
+                <div className="flex flex-col text-lg lg:text-3xl items-center text-blue-400 font-semibold">
+                  <span className="mb-2">Comprovante de Residência</span>
+                  <img className="rounded-lg cursor-pointer" onClick={() => {window.open(`${user.documentos[0].residencia}`)}} src={user.documentos[0].residencia} width={150} height={200} alt="Identidade"/>
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>
