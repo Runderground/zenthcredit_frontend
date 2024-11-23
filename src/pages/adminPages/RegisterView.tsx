@@ -56,12 +56,29 @@ export default function RegisterView() {
     cep: "",
     documentos: [
       {
-          comprovante_renda: "",
-        identidade: "",
-        residencia: "",
+          comprovante_renda: [
+            {
+              url: "",
+              key: ""
+            }
+          ],
+        residencia: [
+          {
+            url: "",
+            key: ""
+          }
+        ],
+        identidade: [
+          {
+            url: "",
+            key: ""
+          }
+        ],
       }
     ]
   });
+
+  console.log(user?.documentos[0].residencia[0].key)
 
   useEffect(() => {
     async function fetchData() {
@@ -198,18 +215,19 @@ export default function RegisterView() {
               <div className="flex flex-col gap-12 w-full">
                 <div className="flex flex-col items-center text-blue-400 font-semibold text-lg lg:text-3xl">
                   <span className="mb-2">Identidade</span>
-                  <img className="rounded-lg lg:w-72" onClick={() => {window.open(`${user.documentos[0].identidade}`)}} src={user.documentos[0].identidade} width={150} height={200} alt="Identidade"/>
+                  <img className="rounded-lg lg:w-72 cursor-pointer" onClick={() => {window.open(`${user.documentos[0].identidade[0].url}`)}} src={user.documentos[0].identidade[0].url} width={150} height={200} alt="Identidade"/>
                 </div>
                 <div className="flex flex-col text-lg lg:text-3xl items-center text-blue-400 font-semibold">
                   <span className="mb-2">Comprovante de Renda</span>
-                  <img className="rounded-lg" onClick={() => {window.open(`${user.documentos[0].comprovante_renda}`)}} src={user.documentos[0].comprovante_renda} width={150} height={200} alt="Identidade"/>
+                  <img className="rounded-lg lg:w-72 cursor-pointer" onClick={() => {window.open(`${user.documentos[0].comprovante_renda[0].url}`)}} src={user.documentos[0].comprovante_renda[0].url} width={150} height={200} alt="Identidade"/>
                 </div>
                 <div className="flex flex-col text-lg lg:text-3xl items-center text-blue-400 font-semibold">
                   <span className="mb-2">Comprovante de Residência</span>
-                  <img className="rounded-lg cursor-pointer" onClick={() => {window.open(`${user.documentos[0].residencia}`)}} src={user.documentos[0].residencia} width={150} height={200} alt="Identidade"/>
+                  <img className="rounded-lg lg:w-72 cursor-pointer" onClick={() => {window.open(`${user?.documentos[0].residencia[0].url}`)}} src={user?.documentos[0].residencia[0].url} width={150} height={200} alt="Identidade"/>
                 </div>
               </div>
             </div>
+            <span>{user?.documentos[0].residencia[0].url}</span>
           </CardContent>
         </Card>
       </section>
