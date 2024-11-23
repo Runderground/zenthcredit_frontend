@@ -91,9 +91,15 @@ export default function MultiStepForm() {
       setLoading(false)
       return
     }
+    /* Usando FormData para enviar os arquivos */
+    const formData = new FormData()
+    formData.append("residencia", residencia as File)
+    formData.append("renda", renda as File)
+    formData.append("identidade", identidade as File)
+    formData.append("values", JSON.stringify(values))
     async function RegisterUser() {
       try {
-        const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/cadastros/register`, values)
+        const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/cadastros/register`, formData)
         toast.success(data.success)
         setLoading(false)
         navigate("../", {replace: true})
