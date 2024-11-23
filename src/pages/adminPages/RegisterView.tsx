@@ -26,6 +26,12 @@ export default function RegisterView() {
   const { token } = useAuth()
 
   const navigate = useNavigate()
+
+  function containsPdf(text: string) {
+    const regex = /pdf$|pdf/i
+
+    return regex.test(text)
+  }
   
   const deleteUser = async (id: string) => {
       try {
@@ -78,7 +84,7 @@ export default function RegisterView() {
     ]
   });
 
-  console.log(user?.documentos[0].residencia[0].key)
+  console.log(user.documentos[0].residencia[0])
 
   useEffect(() => {
     async function fetchData() {
@@ -215,15 +221,38 @@ export default function RegisterView() {
               <div className="flex flex-col gap-12 w-full">
                 <div className="flex flex-col items-center text-blue-400 font-semibold text-lg lg:text-3xl">
                   <span className="mb-2">Identidade</span>
-                  <img className="rounded-lg lg:w-72 cursor-pointer" onClick={() => {window.open(`${user.documentos[0].identidade[0].url}`)}} src={user.documentos[0].identidade[0].url} width={150} height={200} alt="Identidade"/>
+                  {containsPdf(user?.documentos[0].identidade[0].url) ? (
+                    <div className="flex flex-col items-center justify-center cursor-pointer w-[200px] h-[200px] bg-red-400 hover:bg-red-500 transition-colors rounded-lg" onClick={() => {window.open(`${user?.documentos[0].identidade[0].url}`)}}>
+                      <div className="flex flex-col items-center justify-center select-none">
+                        <h2 className="text-3xl text-white">PDF</h2>
+                        <span className="text-xs text-white">Clique para visualizar</span>
+                      </div>
+                    </div>
+                  ) : <img className="rounded-lg lg:w-72 cursor-pointer" onClick={() => {window.open(`${user?.documentos[0].identidade[0].url}`)}} src={user?.documentos[0].identidade[0].url} width={150} height={200} alt="Comprovante de Residencia"/>}
+                  
                 </div>
                 <div className="flex flex-col text-lg lg:text-3xl items-center text-blue-400 font-semibold">
                   <span className="mb-2">Comprovante de Renda</span>
-                  <img className="rounded-lg lg:w-72 cursor-pointer" onClick={() => {window.open(`${user.documentos[0].comprovante_renda[0].url}`)}} src={user.documentos[0].comprovante_renda[0].url} width={150} height={200} alt="Identidade"/>
+                  {containsPdf(user?.documentos[0].comprovante_renda[0].url) ? (
+                    <div className="flex flex-col items-center justify-center cursor-pointer w-[200px] h-[200px] bg-red-400 hover:bg-red-500 transition-colors rounded-lg" onClick={() => {window.open(`${user?.documentos[0].comprovante_renda[0].url}`)}}>
+                      <div className="flex flex-col items-center justify-center select-none">
+                        <h2 className="text-3xl text-white">PDF</h2>
+                        <span className="text-xs text-white">Clique para visualizar</span>
+                      </div>
+                    </div>
+                  ) : <img className="rounded-lg lg:w-72 cursor-pointer" onClick={() => {window.open(`${user?.documentos[0].comprovante_renda[0].url}`)}} src={user?.documentos[0].comprovante_renda[0].url} width={150} height={200} alt="Comprovante de Residencia"/>}
+                  
                 </div>
                 <div className="flex flex-col text-lg lg:text-3xl items-center text-blue-400 font-semibold">
                   <span className="mb-2">Comprovante de Residência</span>
-                  <img className="rounded-lg lg:w-72 cursor-pointer" onClick={() => {window.open(`${user?.documentos[0].residencia[0].url}`)}} src={user?.documentos[0].residencia[0].url} width={150} height={200} alt="Identidade"/>
+                  {containsPdf(user?.documentos[0].residencia[0].url) ? (
+      <div className="flex flex-col items-center justify-center cursor-pointer w-[200px] h-[200px] bg-red-400 hover:bg-red-500 transition-colors rounded-lg" onClick={() => {window.open(`${user?.documentos[0].residencia[0].url}`)}}>
+        <div className="flex flex-col items-center justify-center select-none">
+          <h2 className="text-3xl text-white">PDF</h2>
+          <span className="text-xs text-white">Clique para visualizar</span>
+        </div>
+      </div>
+    ) : <img className="rounded-lg lg:w-72 cursor-pointer" onClick={() => {window.open(`${user?.documentos[0].residencia[0].url}`)}} src={user?.documentos[0].residencia[0].url} width={150} height={200} alt="Comprovante de Residencia"/>}
                 </div>
               </div>
             </div>
