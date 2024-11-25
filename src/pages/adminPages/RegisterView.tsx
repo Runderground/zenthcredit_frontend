@@ -122,7 +122,7 @@ export default function RegisterView() {
               ID: {user._id}
             </CardTitle>
             <div className="flex gap-2">
-              <Button className="bg-yellow-500 hover:bg-yellow-600"><Pencil/></Button>
+              <Button onClick={() => setEditMode(true)}  className="bg-yellow-500 hover:bg-yellow-600"><Pencil/></Button>
               <Dialog>
                 <DialogTrigger>
                   <Button
@@ -275,7 +275,13 @@ export default function RegisterView() {
       </section>}
 
       {/* Modo edição */}
-      {editMode && <section className="m-4 mt-20">
+      {editMode && 
+        <>
+          <div className="flex p-2 bg-black/50 rounded-lg gap-4 fixed bottom-20 right-5">
+            <Button onClick={() => setEditMode(false)} variant="destructive">Cancelar</Button>
+            <Button className="bg-green-500 hover:bg-green-600">Salvar</Button>
+          </div>
+        <section className="m-4 mt-20">
           <div className="flex gap-4 items-center mb-4">
             <Link to="/admin/cadastros">
               <ChevronLeft />
@@ -288,7 +294,7 @@ export default function RegisterView() {
                 ID: {user._id}
               </CardTitle>
               <div className="flex gap-2">
-                <h2>MODO EDIÇÃO ATIVADO</h2>
+                <h2 className="text-yellow-500 font-semibold">MODO EDIÇÃO ATIVADO</h2>
               </div>
             </CardHeader>
             <CardContent className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -418,7 +424,8 @@ export default function RegisterView() {
               </div>
             </CardContent>
           </Card>
-        </section>}
+        </section>
+      </>}
     </>
   );
 }
