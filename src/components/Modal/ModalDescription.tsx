@@ -7,6 +7,6 @@
 
  export default function ModalTitle({text}: ModalDescription) {
    return (
-     <span>{text}</span>
+     <span className="text-slate-600">{text}</span>
    )
  }

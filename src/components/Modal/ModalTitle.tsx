@@ -7,6 +7,6 @@ interface ModalRoot {
 
 export default function ModalTitle({text}: ModalRoot) {
   return (
-    <h1>{text}</h1>
+    <h1 className="text-2xl font-semibold text-slate-800">{text}</h1>
   )
 }
