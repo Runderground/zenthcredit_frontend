@@ -1,6 +1,6 @@
 import { Card, CardTitle, CardHeader, CardContent } from "@/components/ui/card";
 
-import { ContactRound, BriefcaseBusiness, Landmark } from "lucide-react";
+import { ContactRound, BriefcaseBusiness, Landmark, UserRoundCheck } from "lucide-react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -57,8 +57,14 @@ const formSchema = z.object({
 export default function MultiStepForm() {
   const [step, setStep] = useState(0);
   const [loading, setLoading] = useState(false)
-  const stepTitle = ["Informações Gerais", "Análise de Perfil", "Análise de Garantia"]
+  const [residencia, setResidencia] = useState<File | undefined>()
+  const [identidade, setIdentidade] = useState<File | undefined>()
+  const [renda, setRenda] = useState<File | undefined>()
+  const stepTitle = ["Informações Gerais", "Análise de Perfil", "Análise de Garantia", "Verificação de Identidade"]
   const submitBtn = useRef<HTMLButtonElement>(null)
+  const residenciaBtn = useRef<HTMLInputElement>(null)
+  const identidadeBtn = useRef<HTMLInputElement>(null)
+  const rendaBtn = useRef<HTMLInputElement>(null)
 
   const navigate = useNavigate()
 
@@ -80,9 +86,20 @@ export default function MultiStepForm() {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true)
+    if(!residencia || !renda || !identidade) {
+      toast.error("Preencha todos os campos referentes a identidade, renda e residência na parte de Verificação!")
+      setLoading(false)
+      return
+    }
+    /* Usando FormData para enviar os arquivos */
+    const formData = new FormData()
+    formData.append("residencia", residencia as File)
+    formData.append("renda", renda as File)
+    formData.append("identidade", identidade as File)
+    formData.append("values", JSON.stringify(values))
     async function RegisterUser() {
       try {
-        const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/cadastros/register`, values)
+        const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/cadastros/register`, formData)
         toast.success(data.success)
         setLoading(false)
         navigate("../", {replace: true})
@@ -116,6 +133,10 @@ export default function MultiStepForm() {
               />
               <Landmark
                 className={step === 2 ? "text-blue-500" : ""}
+                size={step === 2 ? 45 : 40}
+              />
+              <UserRoundCheck
+                className={step === 3 ? "text-blue-500" : ""}
                 size={step === 2 ? 45 : 40}
               />
             </div>
@@ -332,6 +353,39 @@ export default function MultiStepForm() {
                     />
                   </div>
                 }
+                {step == 3 &&
+                <div className="grid grid-cols-1 gap-4">
+                  <div className="flex flex-col gap-2">
+                    <h3 className="text-sm font-semibold">Comprovante de residência</h3>
+                    <span className="flex flex-1 text-xs text-blue-500 bg-blue-200 p-2 rounded-lg border border-blue-400">Deve ser uma conta de luz, água, telefone, etc. que esteja o endereço visível com seu nome ou de um terceiro. ( O CEP deve ser preenchido exatamente como o da foto )</span>
+                    <div>
+                      <Button
+                        variant={"outline"}
+                        onClick={() => residenciaBtn.current?.click()}>Escolher arquivo</Button>
+                    </div>
+                    <input type="file" ref={residenciaBtn} onChange={(e) => setResidencia(e.target.files?.[0])} accept="" hidden/>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <h3 className="text-sm font-semibold">Comprovante de Renda</h3>
+                    <span className="flex flex-1  text-xs text-blue-500 bg-blue-200 p-2 rounded-lg border border-blue-400">Pode ser um extrato bancário, contracheque, declaração de imposto de renda, etc.</span>
+                    <div>
+                      <Button
+                        variant={"outline"}
+                        onClick={() => rendaBtn.current?.click()}>Escolher arquivo</Button>
+                    </div>
+                    <input type="file" onChange={(e) => setRenda(e.target.files?.[0])} ref={rendaBtn} accept="" hidden/>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <h3 className="text-sm font-semibold">Identidade ( RG ou CNH )</h3>
+                    <span className="flex flex-1 text-xs text-blue-500 bg-blue-200 p-2 rounded-lg border border-blue-400">Deve ser uma única foto do seu RG ou CNH aberto. ( O nome, data de nascimento e CPF devem estar preenchidos exatamente como está no RG/CNH )</span>
+                    <div>
+                      <Button
+                        variant={"outline"}
+                        onClick={() => identidadeBtn.current?.click()}>Escolher arquivo</Button>
+                    </div>
+                    <input type="file" onChange={(e) => setIdentidade(e.target.files?.[0])} ref={identidadeBtn} accept="" hidden/>
+                  </div>
+                </div>}
                 {/* <div className={`bg-yellow-200 p-2 rounded-lg border border-yellow-300 ${step === 2 ? "block" : "hidden"}`}>
                   <span className="text-sm text-yellow-600">Atenção: Caso não conclua o registro após apertar Concluir, volte as etapas e verifique se está tudo certo!</span>
                 </div>
@@ -358,21 +412,21 @@ export default function MultiStepForm() {
               </Button>
               <Button
                 onClick={() => setStep(step + 1)}
-                className={`${step < 2 ? "block" : "hidden"}`}
+                className={`${step < 3 ? "block" : "hidden"}`}
                 variant="outline"
               >
                 Avançar
               </Button>
               <Dialog>
                 <DialogTrigger>
-                  <Button className={`bg-green-400 hover:bg-green-500 mb-2 ${step === 2 ? "block" : "hidden"}`}>Cadastrar</Button>
+                  <Button className={`bg-green-400 hover:bg-green-500 mb-2 ${step === 3 ? "block" : "hidden"}`}>Cadastrar</Button>
                 </DialogTrigger>
                 <DialogContent>
                   <DialogTitle>AUTORIZAÇÃO PARA DISPONIBILIZAÇÃO</DialogTitle>
                   <DialogDescription>
                     <span>Ao clicar <strong>Concluir</strong> você estará aceitando os seguintes termos:</span>
                   </DialogDescription>
-                  <div className="border border-slate-300 p-4 rounded-lg">
+                  <div className="border border-slate-300 h-[300px] p-4 rounded-lg">
                     <span>
                       Autorização para Disponibilização de histórico de crédito
                     </span>
@@ -380,7 +434,7 @@ export default function MultiStepForm() {
                     <p>Esta autorização tem validade de até 3 ( três ) meses a contar da presente data.</p>
                     <p>Estou ciente de que poderei revogar, a qualquer tempo, esta autorização, perante o gestor de banco de dados.</p>
                   </div>
-                  <div className={`bg-yellow-200 p-2 rounded-lg border border-yellow-300 ${step === 2 ? "block" : "hidden"}`}>
+                  <div className={`bg-yellow-200 p-2 rounded-lg border border-yellow-300 ${step === 3 ? "block" : "hidden"}`}>
                     <span className="text-sm text-yellow-600">Atenção: Caso não conclua o registro após apertar Concluir, volte as etapas e verifique se está tudo certo!</span>
                   </div>
                     <Button
