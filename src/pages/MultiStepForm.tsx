@@ -31,7 +31,7 @@ import toast from 'react-hot-toast'
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import {
   Select,
@@ -60,6 +60,9 @@ export default function MultiStepForm() {
   const [residencia, setResidencia] = useState<File | undefined>()
   const [identidade, setIdentidade] = useState<File | undefined>()
   const [renda, setRenda] = useState<File | undefined>()
+  const [image1, setImage1] = useState<string>()
+  const [image2, setImage2] = useState<stringl>()
+  const [image3, setImage3] = useState<string>()
   const stepTitle = ["Informações Gerais", "Análise de Perfil", "Análise de Garantia", "Verificação de Identidade"]
   const submitBtn = useRef<HTMLButtonElement>(null)
   const residenciaBtn = useRef<HTMLInputElement>(null)
@@ -83,6 +86,28 @@ export default function MultiStepForm() {
       garantia: "",
     },
   });
+
+  const handleChangeFileResidencia = () => {
+    const file = residenciaBtn.current?.files?.[0]
+    if (file) {
+      setResidencia(file)
+      setImage1(URL.createObjectURL(file))
+    }
+  }
+  const handleChangeFileRenda = () => {
+    const file = rendaBtn.current?.files?.[0]
+    if (file) {
+      setRenda(file)
+      setImage2(URL.createObjectURL(file))
+    }
+  }
+  const handleChangeFileIdentidade = () => {
+    const file = identidadeBtn.current?.files?.[0]
+    if (file) {
+      setIdentidade(file)
+      setImage3(URL.createObjectURL(file))
+    }
+  }
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true)
@@ -355,35 +380,45 @@ export default function MultiStepForm() {
                 }
                 {step == 3 &&
                 <div className="grid grid-cols-1 gap-4">
+                  <span className="bg-yellow-200 text-yellow-700 p-2 border border-yellow-400 rounded-lg text-sm">Tamanho máximo dos Arquivos: 5MB, Caso ocorra algum erro inesperado, verifique o tamanho dos seus arquivos.</span>
                   <div className="flex flex-col gap-2">
                     <h3 className="text-sm font-semibold">Comprovante de residência</h3>
                     <span className="flex flex-1 text-xs text-blue-500 bg-blue-200 p-2 rounded-lg border border-blue-400">Deve ser uma conta de luz, água, telefone, etc. que esteja o endereço visível com seu nome ou de um terceiro. ( O CEP deve ser preenchido exatamente como o da foto )</span>
                     <div>
+                      {image1 && 
+                        <img src={image1} alt="Comprovante de residência" className="w-[200px] mb-2 rounded-lg"/>
+                      }
                       <Button
                         variant={"outline"}
                         onClick={() => residenciaBtn.current?.click()}>Escolher arquivo</Button>
                     </div>
-                    <input type="file" ref={residenciaBtn} onChange={(e) => setResidencia(e.target.files?.[0])} accept="" hidden/>
+                    <input type="file" ref={residenciaBtn} onChange={(e) => handleChangeFileResidencia()} accept="" hidden/>
                   </div>
                   <div className="flex flex-col gap-2">
                     <h3 className="text-sm font-semibold">Comprovante de Renda</h3>
                     <span className="flex flex-1  text-xs text-blue-500 bg-blue-200 p-2 rounded-lg border border-blue-400">Pode ser um extrato bancário, contracheque, declaração de imposto de renda, etc.</span>
                     <div>
+                      {image2 && 
+                        <img src={image2} alt="Comprovante de residência" className="w-[200px] mb-2 rounded-lg"/>
+                      }
                       <Button
                         variant={"outline"}
                         onClick={() => rendaBtn.current?.click()}>Escolher arquivo</Button>
                     </div>
-                    <input type="file" onChange={(e) => setRenda(e.target.files?.[0])} ref={rendaBtn} accept="" hidden/>
+                    <input type="file" onChange={(e) => handleChangeFileRenda()} ref={rendaBtn} accept="" hidden/>
                   </div>
                   <div className="flex flex-col gap-2">
                     <h3 className="text-sm font-semibold">Identidade ( RG ou CNH )</h3>
                     <span className="flex flex-1 text-xs text-blue-500 bg-blue-200 p-2 rounded-lg border border-blue-400">Deve ser uma única foto do seu RG ou CNH aberto. ( O nome, data de nascimento e CPF devem estar preenchidos exatamente como está no RG/CNH )</span>
                     <div>
+                      {image3 && 
+                        <img src={image3} alt="Comprovante de residência" className="w-[200px] mb-2 rounded-lg"/>
+                      }
                       <Button
                         variant={"outline"}
                         onClick={() => identidadeBtn.current?.click()}>Escolher arquivo</Button>
                     </div>
-                    <input type="file" onChange={(e) => setIdentidade(e.target.files?.[0])} ref={identidadeBtn} accept="" hidden/>
+                    <input type="file" onChange={(e) => handleChangeFileIdentidade()} ref={identidadeBtn} accept="" hidden/>
                   </div>
                 </div>}
                 {/* <div className={`bg-yellow-200 p-2 rounded-lg border border-yellow-300 ${step === 2 ? "block" : "hidden"}`}>
