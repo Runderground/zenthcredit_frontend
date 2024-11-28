@@ -20,6 +20,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+
 import {
   Form,
   FormControl,
@@ -101,10 +102,7 @@ export default function RegisterView() {
   const location = useParams();
   const [deleteLoad, setDeleteLoad] = useState(false);
   const [editState, setEditState] = useState("email");
-  const [editValue, setEditValue] = useState({
-    value: "",
-  });
-  console.log(editValue)
+  const [loading, setLoading] = useState(false)
   const [modalOpen, setModalOpen] = useState(false);
   const [user, setUser] = useState({
     _id: "",
@@ -158,42 +156,59 @@ export default function RegisterView() {
     },
   });
 
-  const updateUser = async (id: string) => {
-    const { data } = await axios.put(
-      `${import.meta.env.VITE_API_URL}/cadastros/update/${id}?type=${editState}`,
-      editValue,
-      {
-        headers: {
-          authorization: `Bearer ${token}`,
+  const updateUser = async (id: string, valor: string) => {
+    setLoading(true)
+    try {
+      const { data } = await axios.put(
+        `${import.meta.env.VITE_API_URL}/cadastros/update/${id}?type=${editState}`,
+        { value: valor },
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
         },
-      },
-    );
-    console.log(data);
+      );
+      toast.success(data.success)
+      setLoading(false)
+      setModalOpen(false)
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/cadastros/find_user_unique?id=${location.id}`,
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
+      setUser(res.data)
+    } catch (err: any) {
+      setLoading(false)
+      toast.error(err.response.data.error)
+      console.error(err)
+    }
   };
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     if (editState === "nome") {
-      setEditValue({value: values.nome})
-      updateUser(user._id);
-      console.log("Funcionou");
+      updateUser(user._id, values.nome);
     } else if (editState === "email") {
-      console.log("email:", values.email);
+      updateUser(user._id, values.email);
     } else if (editState === "telefone") {
-      console.log("telefone:", values.telefone);
+      updateUser(user._id, values.telefone);
     } else if (editState === "cpf") {
-      console.log("cpf:", values.cpf);
+      updateUser(user._id, values.cpf);
     } else if (editState === "nascimento") {
-      console.log("nascimento:", values.nascimento);
+      updateUser(user._id, values.nascimento);
     } else if (editState === "cep") {
-      console.log("cep:", values.cep);
+      updateUser(user._id, values.cep);
     } else if (editState === "renda") {
-      console.log("renda:", values.renda);
+      updateUser(user._id, values.renda);
     } else if (editState === "motivo") {
-      console.log("motivo:", values.motivo);
+      updateUser(user._id, values.motivo);
     } else if (editState === "ocupacao") {
-      console.log("ocupacao:", values.ocupacao);
+      updateUser(user._id, values.ocupacao);
     } else if (editState === "garantia") {
-      console.log("garantia:", values.garantia);
+      updateUser(user._id, values.garantia);
     }
   }
 
@@ -509,8 +524,9 @@ export default function RegisterView() {
               <Button
                 type="submit"
                 className="bg-green-400 hover:bg-green-500 self-end"
-              >
-                Salvar
+                disabled={loading}
+                >
+                {loading ? "Aguarde..." : "Salvar"}
               </Button>
             </div>
           </form>
