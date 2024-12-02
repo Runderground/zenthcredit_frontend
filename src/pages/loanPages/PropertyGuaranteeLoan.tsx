@@ -13,7 +13,7 @@ export default function PropertyGuaranteeLoan() {
       <section className="bg-cover bg-center h-96" style={{backgroundImage: "url('https://i.imgur.com/WfmFCmp.png')"}}>
 
         <div className="relative z-10 flex items-center ml-2 justify-start h-full text-white">
-          <div className="flex flex-col mt-20">
+          <div className="flex flex-col mt-20 mx-4">
             <h1 className="text-3xl font-semibold text-shadow">Empréstimo com Garantia de Imóvel</h1>
             <p>Condições sob medida, com parcelas acessíveis e taxas que facilitam.</p>
             <div className="mt-2">
@@ -24,7 +24,7 @@ export default function PropertyGuaranteeLoan() {
       </section>
       <section className="flex flex-col lg:flex-row text-center lg:text-start m-4">
         <img className="h-96 self-center rounded-lg m-2" src={PropertySVG} alt="Car SVG"/>
-        <div className='lg:mt-8 flex flex-col gap-4'>
+        <div className='m-4 flex flex-col gap-4'>
           <h1 className="font-bold text-4xl text-slate-700">O que é um empréstimo com garantia de imóvel</h1>
           <p className="text-2xl text-slate-500 text-justify">É simples! Você usa sua casa, apartamento ou ponto comercial como garantia para obter até R$5 milhões. Aproveite prazos de até 240 meses e taxas reduzidas para realizar projetos ambiciosos. Descubra como solicitar!</p>
           <div>
