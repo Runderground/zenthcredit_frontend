@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { BsWhatsapp } from 'react-icons/bs'
-import CarSVG from '../../assets/Loans/Car.png'
+import CarSVG from '../../assets/Loans/Car.jpg'
 import { Link } from 'react-router-dom' 
 
 export default function VehicleGuaranteeLoan() {
@@ -12,7 +12,7 @@ export default function VehicleGuaranteeLoan() {
     <>
       <section className="bg-cover bg-center h-96" style={{backgroundImage: "url('https://i.imgur.com/584j2op.png')"}}>
         <div className="relative z-10 flex items-center ml-2 justify-start h-full text-white">
-          <div className="flex flex-col mt-20">
+          <div className="flex flex-col mt-20 mx-4">
             <h1 className="text-3xl font-semibold text-shadow">Empréstimo com garantia de Veículo</h1>
             <p>Condições sob medida, com parcelas acessíveis e taxas que facilitam.</p>
             <div className="mt-2">
@@ -23,7 +23,7 @@ export default function VehicleGuaranteeLoan() {
       </section>
       <section className="flex flex-col lg:flex-row text-center lg:text-start m-4">
         <img className="h-96 self-center rounded-lg m-2" src={CarSVG} alt="Car SVG"/>
-        <div className='lg:mt-8 flex flex-col gap-4'>
+        <div className='m-4 flex flex-col gap-4'>
           <h1 className="font-bold text-4xl text-slate-700">O que é um empréstimo com garantia de veículo?</h1>
           <p className="text-2xl text-slate-500 text-justify">O empréstimo com garantia de veículo é um tipo de empréstimo em que o seu veículo é colocado como garantia para a instituição financeira.</p>
           <p className="text-2xl text-slate-500 text-justify">Você tem Taxas de juros menores comparado ao <Link className="text-blue-500 underline"to="/emprestimos/pessoal">Empréstimo Pessoal</Link>, prazos mais longos, e muito mais!</p>

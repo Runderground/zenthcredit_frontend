@@ -21,7 +21,7 @@ export default function PersonalLoan() {
       </section>
       <section className="flex flex-col lg:flex-row text-center lg:text-start m-4">
         <img className="h-96 self-center rounded-lg m-2" src={AplicationSVG} alt="Car SVG"/>
-        <div className='lg:mt-8 flex flex-col gap-4'>
+        <div className='m-4 flex flex-col gap-4'>
           <h1 className="font-bold text-4xl text-slate-700">O que é um empréstimo pessoal Zenith Credit?</h1>
           <p className="text-2xl text-slate-500 text-justify">O empréstimo pessoal da Zenith Credit é uma solução segura para pessoas físicas obterem crédito de forma rápida. Nele, não há necessidade de ofertar algum bem como garantia, nem o motivo para solicitar o dinheiro emprestado.</p>
           <p className="text-2xl text-slate-500 text-justify">Assim, você pode realizar o empréstimo para qualquer finalidade, seja para pagar dívidas, reformar sua casa, viajar, abrir um negócio ou investir em estudos.</p>
