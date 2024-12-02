@@ -16,7 +16,6 @@ import SupportSVG from '../assets/How_we_works/Support.png'
 
 // Parceiros
 import Itau from '../assets/Brands/Itau.png'
-import BB from '../assets/Brands/BB.png'
 import Santander from '../assets/Brands/Santander.png'
 import Bradesco from '../assets/Brands/Bradesco.png'
 import Creditas from '../assets/Brands/Creditas.png'
