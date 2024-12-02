@@ -106,22 +106,21 @@ export default function SimuladorDeEmprestimo() {
 
             {/* Valor do Juros */}
             <div className="flex flex-col gap-4">
-              <span className="text-md text-slate-500 font-semibold">Valor do Juros:</span>
+              <span className="text-md text-slate-500 font-semibold">Tipo de empréstimo</span>
               <Select onValueChange={(value) => setJuros(value)}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Quantos %?"/>
+                  <SelectValue placeholder="Selecione o tipo de empréstimo"/>
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="1.09">1,09% ( com garantia de Ímovel )</SelectItem>
-                  <SelectItem value="1.49">1,49% ( com garantia de Veículo )</SelectItem>
-                  <SelectItem value="7.95">7,95% ( média Emprestimo Pessoal )</SelectItem>
+                  <SelectItem value="1.09">Empréstimo com garantia de Ímovel</SelectItem>
+                  <SelectItem value="1.49">Empréstimo com garantia de Veículo</SelectItem>
+                  <SelectItem value="7.95">Empréstimo Pessoal</SelectItem>
                 </SelectContent>
               </Select>
             <div className="flex justify-between w-full text-sm text-slate-500">
             <span>Não é valor definitivo, pode surgir qualquer alteração ao fazer uma consulta.</span>
             </div>
             </div>
-            <h2 className="text-slate-700 text-3xl text-center font-bold">{juros}%</h2>
           </div>
         </div>
         <div className="border border-blue-200 p-4 rounded-lg bg-blue-100/90">
