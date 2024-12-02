@@ -1,5 +1,12 @@
 import HomeSvg from '../assets/Home_Section_One.png'
 import {Button} from '@/components/ui/button'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext
+} from '@/components/ui/carousel'
 import { ServiceCard } from '../components/serviceCard/index'
 import { CircleDollarSign, Car, Factory } from 'lucide-react'
 import ApiSVG from '../assets/How_we_works/Aplication.png'
@@ -14,6 +21,10 @@ import Santander from '../assets/Brands/Santander.png'
 import Bradesco from '../assets/Brands/Bradesco.png'
 import Creditas from '../assets/Brands/Creditas.png'
 import CashMe from '../assets/Brands/CashMe.png'
+import BV from '../assets/Brands/BV.png'
+import C6Bank from '../assets/Brands/C6Bank.png'
+import Sofisa from '../assets/Brands/Sofisa.png'
+import BancoPan from '../assets/Brands/BancoPan.png'
 import { useNavigate } from 'react-router-dom'
 import Footer from '../components/Footer'
 
@@ -28,9 +39,9 @@ export default function Home() {
       bgColor: "bg-orange-400"
     },
     {
-      url: BB,
-      alt: "BB",
-      bgColor: "bg-yellow-400"
+      url: BV,
+      alt: "BV",
+      bgColor: "bg-blue-100"
     },
     {
       url: Santander,
@@ -51,6 +62,21 @@ export default function Home() {
       url: Bradesco,
       alt: "Bradesco",
       bgColor: "bg-red-100"
+    },
+    {
+      url: C6Bank,
+      alt: "C6Bank",
+      bgColor: "bg-slate-100"
+    },
+    {
+      url: Sofisa,
+      alt: "Sofisa",
+      bgColor: "bg-green-100"
+    },
+    {
+      url: BancoPan,
+      alt: "BancoPan",
+      bgColor: "bg-blue-100"
     },
   ]
   const HowWeWorks = [
@@ -118,16 +144,30 @@ export default function Home() {
       </ul>
     </section>
         {/* Sessão 3 */}
-        <section className="flex flex-col items-center p-2">
+        <section className="flex flex-col items-center m-4">
         <h1 className="text-3xl mb-4 font-bold text-zinc-600">Nossos parceiros</h1>
           <h2 className="text-slate-400 text-sm mb-4">Algumas das empresas que confia em nosso trabalho ;)</h2>
-          <div className="flex flex-col w-full items-center">
+          {/* <div className="flex flex-col w-full items-center">
             <div className="grid grid-cols-3 gap-6 mb-4">
               {parceiros.map(p => (
                 <img className={`h-24 p-4 bg-blue-200 rounded-lg ${p.bgColor}`} src={p.url} alt={p.alt} />
               ))}
             </div>
-          </div>
+          </div> */}
+        <Carousel orientation="horizontal" opts={{align: "start", loop: true}} className="mb-4 w-[300px] lg:w-[500px]">
+          <CarouselContent>
+            {parceiros.map((item,index) => (
+        <CarouselItem key={index} className="basis-1/3">
+            <div className={`flex items-center justify-center h-24 lg:h-40 ${item.bgColor} rounded-lg`}>
+              <img src={item.url} alt={item.alt} className="p-4 lg:p-8"/>
+            </div>
+        </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselNext/>
+          <CarouselPrevious/>
+        </Carousel>
+          
         </section>
         {/* Sessão 4 */}
       <section className="bg-slate-900 p-1">
