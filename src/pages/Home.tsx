@@ -1,3 +1,4 @@
+import * as React from 'react'
 import HomeSvg from '../assets/Home_Section_One.png'
 import {Button} from '@/components/ui/button'
 import {
@@ -30,7 +31,15 @@ import Footer from '../components/Footer'
 export default function Home() {
 
   const navigate = useNavigate()
+  const autoNext = React.useRef<HTMLButtonElement>()
 
+  //* Função para Autoplay no Carrossel dos parceiros *//
+  React.useEffect(() => {
+    setInterval(() => {
+      autoNext.current?.click()
+    }, 2000)
+  }, [])
+  
   const parceiros = [
     {
       url: Itau,
@@ -163,7 +172,7 @@ export default function Home() {
         </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselNext/>
+          <CarouselNext ref={autoNext}/>
           <CarouselPrevious/>
         </Carousel>
           
