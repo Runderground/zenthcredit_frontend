@@ -31,7 +31,7 @@ import Footer from '../components/Footer'
 export default function Home() {
 
   const navigate = useNavigate()
-  const autoNext = React.useRef<HTMLButtonElement>()
+  const autoNext = React.useRef<HTMLButtonElement>(null)
 
   //* Função para Autoplay no Carrossel dos parceiros *//
   React.useEffect(() => {
